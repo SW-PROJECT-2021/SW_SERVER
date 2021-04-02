@@ -12,6 +12,7 @@ router.get('/fail', (req, res) => {
 
 router.get('/testSession', (req, res) => {
   const result = req.session.passport;
+  console.log(req.session.passport);
   console.log(result);
   if(!result) {
     return res.send("nono!");

@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const auth = require('../middlewares/auth');
 
 const member = [{
     "number": "17101223",
@@ -24,6 +25,7 @@ const member = [{
 ];
 
 router.use('/user', require('./user'));
+router.use('/test', auth.checkSession, require('./test'));
 
 /* GET home page. */
 router.get('/', function (req, res, next) {

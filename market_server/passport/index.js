@@ -9,16 +9,17 @@ exports.config = (passport) => {
     done(null, loginId);
   });
 
-  passport.deserializeUser((loginId, done) => {
+  passport.deserializeUser(async (loginId, done) => {
     console.log("deserializeUser");
     console.log(loginId);
-    const user = userMethod.readOneLoginId(loginId);
+    const user = await userMethod.readOneLoginId(loginId);
     if (user) {
       done(null, loginId);
     } else {
       done(null, false);
     }
   });
+
 
   passport.use(new LocalStrategy({
     usernameField: 'id',

@@ -13,6 +13,9 @@ module.exports = {
   NO_USER: "존재하지않는 유저 id 입니다.",
   ALREADY_EMAIL: "이미 존재하는 이메일 입니다.",
   NO_EMAIL: '존재하지 않는 이메일 입니다.',
+  RULE_MISS_MATCH_ID: "아이디 생성 규칙이 불일치합니다",
+  RULE_MISS_MATCH_PW: "비밀번호 생성 규칙이 불일치합니다",
+  RULE_MISS_MATCH_EMAIL: "이메일 생성 규칙이 불일치합니다",
   MISS_MATCH_PW: "비밀번호가 일치하지 않습니다",
 
   /* User */
@@ -41,6 +44,7 @@ module.exports = {
   GET_USER_SET_SUCCESS: "유저 계정 설정 조회 성공",
   GET_USER_SET_FAIL: "유저 계정 설정 조회 실패",
   NO_EMAIL: '존재하지 않는 이메일',
+  UNAUTHORIZED: '인증 오류',
 
   /* 프로필 */
   READ_PROFILE_SUCCESS: "프로필 조회 성공",

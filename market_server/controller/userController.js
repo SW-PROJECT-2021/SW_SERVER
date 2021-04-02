@@ -1,4 +1,5 @@
 const userService = require('../service/userService');
+const passport = require('passport');
 
 module.exports = {
   signup: async (req, res) => {
@@ -8,17 +9,17 @@ module.exports = {
       userName,
       password
     } = req.body;
-    const newUser = await userService.signup(loginId, email, userName, password, res);
-    
-    return res;
+
+    await userService.signup(loginId, email, userName, password, res);
+
+    if (res.statusCode == 200) {
+      console.log("hello");
+      req.session.passport = {
+        "user": loginId
+      };
+      console.log(req.session);
+      req.session.save();
+      return res;
+    }
   },
-  // login: async (req, res) => {
-  //   const {
-  //     loginId,
-  //     password
-  //   } = req.body;
-  //   const user = await userService.login(email, password, res);
-    
-  //   return res;
-  // },
 }
