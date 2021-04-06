@@ -3,18 +3,18 @@ const userMethod = require('../method/userMethod');
 const crypto = require('crypto');
 
 exports.config = (passport) => {
-  passport.serializeUser((loginId, done) => {
+  passport.serializeUser((result, done) => {
     console.log("serializeUser");
-    console.log(loginId);
-    done(null, loginId);
+    console.log(result);
+    done(null, result);
   });
 
-  passport.deserializeUser(async (loginId, done) => {
+  passport.deserializeUser(async (result, done) => {
     console.log("deserializeUser");
-    console.log(loginId);
-    const user = await userMethod.readOneLoginId(loginId);
+    console.log(result);
+    const user = await userMethod.readOneLoginId(result.loginId);
     if (user) {
-      done(null, loginId);
+      done(null, result);
     } else {
       done(null, false);
     }
@@ -36,8 +36,13 @@ exports.config = (passport) => {
         salt,
       } = user;
       const inputPassword = await crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('base64');
+      const isAdmin = user.isAdmin;
+      const result = {
+        loginId,
+        isAdmin
+      };
       if (inputPassword == user.password) {
-        done(null, loginId);
+        done(null, result);
       } else {
         done(null, false);
       }

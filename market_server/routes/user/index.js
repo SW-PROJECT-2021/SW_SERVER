@@ -5,6 +5,7 @@ const util = require('../../modules/util');
 const responseMessage = require('../../modules/responseMessage');
 const statusCode = require('../../modules/statusCode');
 const userController = require('../../controller/userController');
+const userMethod = require('../../method/userMethod');
 
 router.get('/fail', (req, res) => {
   return res.status(statusCode.UNAUTHORIZED).send(util.fail(statusCode.UNAUTHORIZED, responseMessage.SIGN_IN_FAIL));
@@ -12,9 +13,8 @@ router.get('/fail', (req, res) => {
 
 router.get('/testSession', (req, res) => {
   const result = req.session.passport;
-  console.log(req.session.passport);
   console.log(result);
-  if(!result) {
+  if (!result) {
     return res.send("nono!");
   }
   return res.send(result);
@@ -24,12 +24,20 @@ router.post('/login',
   passport.authenticate('local', {
     failureRedirect: '/user/fail'
   }),
-  function (req, res) {
-    const { id } = req.body;
-    return res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.SIGN_IN_SUCCESS, {
-      id
-    }));
-});
+  async (req, res) => {
+    const {
+      passport
+    } = req.session;
+    const user = await userMethod.readOneLoginId(passport.user.loginId);
+    const result = {
+      "loginId": user.loginId,
+      "email": user.email,
+      "userName": user.userName,
+      "isAdmin": user.isAdmin
+    };
+    return res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.SIGN_IN_SUCCESS,
+      result));
+  });
 
 router.get('/logout', (req, res) => {
   req.logout();

@@ -9,7 +9,7 @@ const auth = {
     if(!passport) {
       return res.status(statusCode.UNAUTHORIZED).send(util.fail(statusCode.UNAUTHORIZED, responseMessage.UNAUTHORIZED)); 
     }
-    const userId = passport.user;
+    const userId = passport.user.loginId;
     if(!userId) {
       return res.status(statusCode.UNAUTHORIZED).send(util.fail(statusCode.UNAUTHORIZED, responseMessage.UNAUTHORIZED)); 
     }
@@ -17,11 +17,12 @@ const auth = {
     if(!user) {
       return res.status(statusCode.UNAUTHORIZED).send(util.fail(statusCode.UNAUTHORIZED, responseMessage.UNAUTHORIZED)); 
     }
-    req.decoded = userId;
+    req.decoded = passport;
     next();
   },
   checkAdmin: async (req, res, next) => {
-    const userId = req.decoded;
+    const passport = req.decoded;
+    const userId = passport.user.loginId;
     if(!userId) {
       return res.status(statusCode.UNAUTHORIZED).send(util.fail(statusCode.UNAUTHORIZED, responseMessage.UNAUTHORIZED)); 
     }

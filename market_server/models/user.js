@@ -2,12 +2,12 @@ module.exports = (sequelize, DataTypes) => {
   return sequelize.define('User', {
     loginId: {
       type: DataTypes.STRING(30),
-      unique: true,
+      // unique: true,
       allowNull: false,
     },
     email: {
       type: DataTypes.STRING(30),
-      unique: true,
+      // unique: true,
       allowNull: false,
     },
     userName: {
@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: {
       type: DataTypes.STRING(200),
-      unique: true,
       allowNull: false,
     },
     salt: {
@@ -25,7 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     isAdmin: {
       type: DataTypes.BOOLEAN,
-      allowNull: true
+      defaultValue: false,
+      allowNull: false
     },
   }, {
     freezeTableName: true,

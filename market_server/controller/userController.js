@@ -15,7 +15,10 @@ module.exports = {
     if (res.statusCode == 200) {
       console.log("hello");
       req.session.passport = {
-        "user": loginId
+        "user": {
+          "loginId": loginId,
+          "isAdmin" : false
+        }
       };
       console.log(req.session);
       req.session.save();

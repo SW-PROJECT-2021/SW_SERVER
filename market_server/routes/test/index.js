@@ -3,17 +3,17 @@ const router = express.Router();
 const auth = require('../../middlewares/auth');
 
 router.get('/', (req, res) => {
-  const userId = req.decoded;
-  console.log(userId);
-  if(userId) {
+  const passport = req.decoded;
+  console.log(passport);
+  if(passport) {
     return res.send("GOOD!");
   } 
   return res.send("NO~~~");
 });
 
 router.get('/admin', auth.checkAdmin, (req, res) => {
-  const userId = req.decoded;
-  if(userId) {
+  const passport = req.decoded;
+  if(passport) {
     return res.send("GOOD ADMIN!");
   } 
   return res.send("NO ADMIN!");

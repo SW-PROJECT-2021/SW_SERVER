@@ -110,6 +110,7 @@ module.exports = {
         loginId,
         email,
         userName,
+        isAdmin: user.isAdmin
       }));
       transaction.commit();
       return;
