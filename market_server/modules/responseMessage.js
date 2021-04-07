@@ -50,6 +50,34 @@ module.exports = {
   READ_PROFILE_SUCCESS: "프로필 조회 성공",
   READ_PROFILE_FAIL: "프로필 조회 실패",
 
+  /* 상품 */
+  NEED_COUNT: "상품의 수량 필요",
+  REGISTER_PRODUCT_SUCCESS: "상품 등록 성공",
+  REGISTER_PRODUCT_FAIL: "상품 등록 실패",
+  FIND_ALL_PRODUCTS_SUCCESS: "전체 상품 조회 성공",
+  FIND_ALL_PRODUCTS_FAIL: "전체 상품 조회 실패",
+  FIND_PRODUCT_BY_ID_SUCCESS: "특정 상품 조회 성공",
+  FIND_PRODUCT_BY_ID_FAIL: "특정 상품 조회 실패",
+  FIND_ALL_PRODUCTS_BY_ONE_CATEGORY_SUCCESS: "1개 카테고리로 상품 조회 성공",
+  FIND_ALL_PRODUCTS_BY_ONE_CATEGORY_FAIL: "1개 카테고리로 상품 조회 실패",
+  FIND_ALL_AEROBIC_SUCCESS: "유산소 상품 조회 성공",
+  FIND_ALL_AEROBIC_FAIL: "유산소 상품 조회 실패",
+  FIND_ALL_WEIGHT_SUCCESS: "웨이트 상품 조회 성공",
+  FIND_ALL_WEIGHT_FAIL: "웨이트 상품 조회 실패",
+  FIND_ALL_AIDS_SUCCESS: "운동보조기구 상품 조회 성공",
+  FIND_ALL_AIDS_FAIL: "운동보조기구 상품 조회 실패",
+  FIND_ALL_MASSAGE_SUCCESS: "마사지 상품 조회 성공",
+  FIND_ALL_MASSAGE_FAIL: "마사지 상품 조회 실패",
+  FIND_ALL_ASSISTANT_SUCCESS: "보조 상품 조회 성공",
+  FIND_ALL_ASSISTANT_FAIL: "보조 상품 조회 실패",
+  UPDATE_PRODUCT_SUCCESS: "상품 수정 성공",
+  UPDATE_PRODUCT_FAIL: "상품 수정 실패",
+  DELETE_PRODUCT_SUCCESS: "상품 삭제 성공",
+  DELETE_PRODUCT_FAIL: "상품 삭제 실패",
+
+  /* 카테고리 */
+  NO_CATEGORY: "존재하지 않는 카테고리",
+
   /* 서버에러 */
   INTERNAL_SERVER_ERROR: "서버 내부 오류",
 }
