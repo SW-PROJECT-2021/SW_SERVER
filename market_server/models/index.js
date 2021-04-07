@@ -13,5 +13,11 @@ if (config.use_env_variable) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 db.User = require('./user')(sequelize, Sequelize);
+db.Product = require('./product')(sequelize, Sequelize);
+db.Category = require('./category')(sequelize, Sequelize);
+
+// 1 : N 관계 Category : Product
+db.Category.hasMany(db.Product);
+db.Product.belongsTo(db.Category);
 
 module.exports = db;
