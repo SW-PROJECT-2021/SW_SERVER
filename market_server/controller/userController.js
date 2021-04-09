@@ -17,12 +17,28 @@ module.exports = {
       req.session.passport = {
         "user": {
           "loginId": loginId,
-          "isAdmin" : false
+          "isAdmin": false
         }
       };
       console.log(req.session);
       req.session.save();
       return res;
     }
+  },
+  checkIdIfExist: async (req, res) => {
+    const {
+      id
+    } = req.params;
+    await userService.checkId(id, res);
+    
+    return res;
+  },
+  checkEmailIfExist: async (req, res) => {
+    const {
+      email
+    } = req.params;
+    await userService.checkEmail(email, res);
+
+    return res;
   },
 }
