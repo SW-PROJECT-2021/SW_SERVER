@@ -20,6 +20,14 @@ module.exports = {
 
     return res;
   },
+  findProductById: async (req, res) => {
+    const {
+      id
+    } = req.params;
+    await productService.findProduct(id, res);
+    
+    return res;
+  },
   findAllProduct: async (req, res) => {
     await productService.findAll(res);
 

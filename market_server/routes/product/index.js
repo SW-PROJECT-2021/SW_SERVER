@@ -5,6 +5,7 @@ const productController = require('../../controller/productController');
 const auth = require('../../middlewares/auth');
 
 router.post('/', auth.checkSession, auth.checkAdmin, upload.single('img'), productController.registerProduct);
+router.get('/select/:id', productController.findProductById);
 router.get('/', productController.findAllProduct);
 router.get('/one/:category', productController.findAllProductByOneCategory);
 router.get('/aerobic', productController.findAllProductByAerobic);
