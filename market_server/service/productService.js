@@ -67,10 +67,10 @@ module.exports = {
 
     try {
       const product = await productMethod.findById(id);
-      if(!product) {
+      if (!product) {
         console.log("해당 상품이 존재하지 않습니다.");
         res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NO_EXIST_PRODUCT));
-        
+
         return;
       }
 
@@ -93,6 +93,19 @@ module.exports = {
     } catch (err) {
       console.error(err);
       res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.FIND_ALL_PRODUCTS_FAIL));
+
+      return;
+    }
+  },
+  findRecent: async (res) => {
+    try {
+      const products = await productMethod.findRecent();
+      res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.FIND_RECENT_PRODUCTS_SUCCESS, products));
+
+      return;
+    } catch (err) {
+      console.error(err);
+      res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.FIND_RECENT_PRODUCTS_FAIL));
 
       return;
     }
@@ -193,6 +206,21 @@ module.exports = {
       return;
     }
   },
+  search: async (title, res) => {
+    const searchTitle = title.trim();
+    try {
+      console.log(searchTitle);
+      const products = await productMethod.search(searchTitle);
+      res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.SEARCH_PRODUCT_SUCCESS, products));
+
+      return;
+    } catch (err) {
+      console.error(err);
+      res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.SEARCH_PRODUCT_FAIL));
+
+      return;
+    }
+  },
   updateProduct: async (
     id,
     name,
@@ -233,7 +261,7 @@ module.exports = {
 
       await productMethod.update(id, name, img, price, count, categoryObj.id, transaction);
       res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.UPDATE_PRODUCT_SUCCESS, {
-        "updatedId" : id
+        "updatedId": id
       }));
       transaction.commit();
 
@@ -257,7 +285,7 @@ module.exports = {
 
         return;
       }
-      
+
       await productMethod.delete(id, transaction);
       res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.DELETE_PRODUCT_SUCCESS, {
         "deletedId": id

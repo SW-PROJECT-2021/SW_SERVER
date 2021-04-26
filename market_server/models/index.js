@@ -15,9 +15,23 @@ db.Sequelize = Sequelize;
 db.User = require('./user')(sequelize, Sequelize);
 db.Product = require('./product')(sequelize, Sequelize);
 db.Category = require('./category')(sequelize, Sequelize);
+db.Basket = require('./basket')(sequelize, Sequelize);
+db.Destination = require('./destination')(sequelize, Sequelize);
 
 // 1 : N 관계 Category : Product
 db.Category.hasMany(db.Product);
 db.Product.belongsTo(db.Category);
+
+// 1 : N 관계 Product : Basket
+db.Product.hasMany(db.Basket);
+db.Basket.belongsTo(db.Product);
+
+// 1 : N 관계 User : Basket
+db.User.hasMany(db.Basket);
+db.Basket.belongsTo(db.User);
+
+// 1 : N 관계 User : Destination
+db.User.hasMany(db.Destination);
+db.Destination.belongsTo(db.User);
 
 module.exports = db;
