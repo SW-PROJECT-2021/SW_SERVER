@@ -14,7 +14,7 @@ const {
 } = require('./models');
 
 sequelize.sync({
-    alter: true
+    alter: false
   })
   .then(() => {
     console.log('데이터베이스 연결 성공.');
@@ -31,7 +31,10 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(cors());
+app.use(cors({
+  origin: true,
+  credentials: true
+}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
