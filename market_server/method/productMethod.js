@@ -55,6 +55,23 @@ module.exports = {
       throw err;
     }
   },
+  findRecent: async () => {
+    try {
+      const products = await Product.findAll({
+        where: {
+          isDeleted: false
+        },
+        limit: 4,
+        order: [
+          ['createdAt', 'DESC'],
+        ],
+      });
+
+      return products;
+    } catch (err) {
+      throw err;
+    }
+  },
   findByOneCategory: async (CategoryId, transaction) => {
     try {
       const products = await Product.findAll({
@@ -140,6 +157,22 @@ module.exports = {
         where: {
           CategoryId: {
             [Op.or]: [7, 8, 9, 10, 11]
+          },
+          isDeleted: false
+        }
+      });
+
+      return products;
+    } catch (err) {
+      throw err;
+    }
+  },
+  search: async (title) => {
+    try {
+      const products = await Product.findAll({
+        where: {
+          name: {
+            [Op.like]: "%" + title + "%"
           },
           isDeleted: false
         }

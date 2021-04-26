@@ -25,11 +25,16 @@ module.exports = {
       id
     } = req.params;
     await productService.findProduct(id, res);
-    
+
     return res;
   },
   findAllProduct: async (req, res) => {
     await productService.findAll(res);
+
+    return res;
+  },
+  findRecentProduct: async (req, res) => {
+    await productService.findRecent(res);
 
     return res;
   },
@@ -64,6 +69,15 @@ module.exports = {
   findAllProductByAssistant: async (req, res) => {
     await productService.findAssistant(res);
 
+    return res;
+  },
+  findAllProductBySearch: async (req, res) => {
+    const {
+      title
+    } = req.query;
+    console.log("Hello! " + title);
+    await productService.search(title, res);
+    
     return res;
   },
   updateProductById: async (req, res) => {
