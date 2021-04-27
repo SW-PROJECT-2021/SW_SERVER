@@ -7,7 +7,8 @@ module.exports = {
       name,
       price,
       count,
-      category
+      category,
+      detail
     } = req.body;
 
     await productService.register(
@@ -16,6 +17,7 @@ module.exports = {
       price,
       count,
       category,
+      detail,
       res);
 
     return res;
@@ -87,7 +89,8 @@ module.exports = {
       name,
       price,
       count,
-      category
+      category,
+      detail
     } = req.body;
 
     await productService.updateProduct(
@@ -97,6 +100,7 @@ module.exports = {
       price,
       count,
       category,
+      detail,
       res);
 
     return res;

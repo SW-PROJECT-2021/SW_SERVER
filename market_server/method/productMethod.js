@@ -12,6 +12,7 @@ module.exports = {
     price,
     count,
     CategoryId,
+    detail,
     transaction) => {
     try {
       const product = await Product.create({
@@ -20,6 +21,7 @@ module.exports = {
         price,
         count,
         CategoryId,
+        detail,
       }, {
         transaction
       });
@@ -33,7 +35,8 @@ module.exports = {
     try {
       const product = await Product.findOne({
         where: {
-          id
+          id,
+          isDeleted : false
         }
       });
 
@@ -190,6 +193,7 @@ module.exports = {
     price,
     count,
     CategoryId,
+    detail,
     transaction) => {
     try {
       await Product.update({
@@ -198,6 +202,7 @@ module.exports = {
         price,
         count,
         CategoryId,
+        detail,
       }, {
         where: {
           id
