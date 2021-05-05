@@ -186,6 +186,58 @@ module.exports = {
       throw err;
     }
   },
+  searchDetail: async (
+    title, 
+    minPrice, 
+    maxPrice, 
+    transaction) => {
+    try {
+      const products = await Product.findAll({
+        where: {
+          name: {
+            [Op.like]: "%" + title + "%"
+          },
+          price: {
+            [Op.lte]: maxPrice,
+            [Op.gte]: minPrice
+          },
+          isDeleted: false
+        },
+        transaction
+      });
+
+      return products;
+    } catch (err) {
+      throw err;
+    }
+  },
+  searchDetailWithCategory: async (
+    title, 
+    CategoryId, 
+    minPrice, 
+    maxPrice, 
+    transaction) => {
+    try {
+      const products = await Product.findAll({
+        where: {
+          name: {
+            [Op.like]: "%" + title + "%"
+          },
+          price: {
+            [Op.lte]: maxPrice,
+            [Op.gte]: minPrice
+          },
+          CategoryId,
+          isDeleted: false
+        },
+        transaction
+      });
+
+      return products;
+    } catch (err) {
+      throw err;
+    }
+  },
   update: async (
     id,
     name,

@@ -79,6 +79,8 @@ module.exports = {
   FIND_ALL_ASSISTANT_FAIL: "보조 상품 조회 실패",
   SEARCH_PRODUCT_SUCCESS: "상품 검색 성공",
   SEARCH_PRODUCT_FAIL: "상품 검색 실패",
+  SEARCH_DETAIL_PRODUCT_SUCCESS: "상품 상세 검색 성공",
+  SEARCH_DETAIL_PRODUCT_FAIL: "상품 상세 검색 실패",
   UPDATE_PRODUCT_SUCCESS: "상품 수정 성공",
   UPDATE_PRODUCT_FAIL: "상품 수정 실패",
   DELETE_PRODUCT_SUCCESS: "상품 삭제 성공",
