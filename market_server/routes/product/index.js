@@ -14,7 +14,8 @@ router.get('/weight', productController.findAllProductByWeight);
 router.get('/aids', productController.findAllProductByAids);
 router.get('/massage', productController.findAllProductByMassage);
 router.get('/assistant', productController.findAllProductByAssistant);
-router.get('/search', productController.findAllProductBySearch);
+// router.get('/search', productController.findAllProductBySearch);
+router.get('/search/detail', productController.findAllProductBySearchDetail);
 router.put('/', auth.checkSession, auth.checkAdmin, upload.single('img'), productController.updateProductById);
 router.delete('/:id', auth.checkSession, auth.checkAdmin, productController.deleteProductById);
 

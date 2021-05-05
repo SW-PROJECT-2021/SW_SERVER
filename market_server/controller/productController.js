@@ -82,6 +82,21 @@ module.exports = {
     
     return res;
   },
+  findAllProductBySearchDetail: async (req, res) => {
+    const {
+      title,
+      category,
+      minPrice,
+      maxPrice
+    } = req.query;
+    console.log("title: " + title);
+    console.log("category: " + category);
+    console.log("minPrice: " + minPrice);
+    console.log("maxPrice: " + maxPrice);
+    await productService.searchDetail(title, category, minPrice, maxPrice, res);
+    
+    return res;
+  },
   updateProductById: async (req, res) => {
     const imgFile = req.file;
     const {
@@ -110,5 +125,7 @@ module.exports = {
       id
     } = req.params;
     await productService.deleteProduct(id, res);
+
+    return res;
   }
 }

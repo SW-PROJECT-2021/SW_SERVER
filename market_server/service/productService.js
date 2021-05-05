@@ -222,6 +222,42 @@ module.exports = {
       return;
     }
   },
+  searchDetail: async (
+    title,
+    category,
+    minPrice,
+    maxPrice,
+    res) => {
+    const searchTitle = title.trim();
+    if (!minPrice) {
+      minPrice = -1;
+    }
+    if (!maxPrice) {
+      maxPrice = Number.MAX_SAFE_INTEGER;
+    }
+    try {
+      console.log(searchTitle);
+      transaction = await sequelize.transaction();
+      if (!category) {
+        const products = await productMethod.searchDetail(searchTitle, minPrice, maxPrice, transaction);
+        res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.SEARCH_DETAIL_PRODUCT_SUCCESS, products));
+
+        return;
+      }
+      const categoryObj = await categoryMethod.findByName(category, transaction);
+      const products = await productMethod.searchDetailWithCategory(searchTitle, categoryObj.id, minPrice, maxPrice, transaction);
+      res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.SEARCH_DETAIL_PRODUCT_SUCCESS, products));
+      transaction.commit();
+
+      return;
+    } catch (err) {
+      console.error(err);
+      if (transaction) await transaction.rollback();
+      res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.SEARCH_DETAIL_PRODUCT_FAIL));
+
+      return;
+    }
+  },
   updateProduct: async (
     id,
     name,
