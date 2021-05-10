@@ -86,6 +86,10 @@ module.exports = {
   DELETE_PRODUCT_SUCCESS: "상품 삭제 성공",
   DELETE_PRODUCT_FAIL: "상품 삭제 실패",
 
+  /* 장바구니 */
+  GET_BASKET_SUCCESS: "장바구니 조회 성공",
+  GET_BASKET_FAIL: "장바구니 조회 실패",
+
   /* 카테고리 */
   NO_CATEGORY: "존재하지 않는 카테고리",
 
