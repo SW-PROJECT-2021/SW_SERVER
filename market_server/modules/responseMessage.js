@@ -79,6 +79,18 @@ module.exports = {
   UPDATE_PRODUCT_FAIL: "상품 수정 실패",
   DELETE_PRODUCT_SUCCESS: "상품 삭제 성공",
   DELETE_PRODUCT_FAIL: "상품 삭제 실패",
+  
+    /* 배너 */
+
+  REGISTER_BANNER_SUCCESS: "배너 등록 성공",
+  REGISTER_BANNER_FAIL: "배너 등록 실패",
+  FIND_BANNER_BY_ID_SUCCESS: "특정 배너 조회 성공",
+  FIND_BANNER_BY_ID_FAIL: "특정 상품 조회 실패",
+  NO_EXIST_BANNER: "존재하지 않는 상품",
+  FIND_ALL_BANNER_SUCCESS: "전체 상품 조회 성공",
+  FIND_ALL_BANNER_FAIL: "전체 상품 조회 실패",
+  FIND_AVAILABLE_BANNER_SUCCESS: "유효한 배너 조회 성공",
+  FIND_AVAILABLE_BANNER_FAIL: "유효한 배너 조회 실패",
 
   /* 카테고리 */
   NO_CATEGORY: "존재하지 않는 카테고리",
