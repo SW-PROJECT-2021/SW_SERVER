@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  ul
+    li 학번 : #{member[0].number} /  이름 : #{member[0].name} / 파트 : #{member[0].part}
+    li 학번 : #{member[1].number} /  이름 : #{member[1].name} / 파트 : #{member[1].part}
+    li 학번 : #{member[2].number} /  이름 : #{member[2].name} / 파트 : #{member[2].part}
+    li 학번 : #{member[3].number} /  이름 : #{member[3].name} / 파트 : #{member[3].part}
