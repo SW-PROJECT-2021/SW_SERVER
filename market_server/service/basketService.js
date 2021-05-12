@@ -4,9 +4,6 @@ const statusCode = require('../modules/statusCode');
 const basketMethod = require('../method/basketMethod');
 const userMethod = require('../method/userMethod');
 const productMethod = require('../method/productMethod');
-const {
-  sequelize
-} = require('../models');
 
 module.exports = {
   getBasket: async (UserId, res) => {
