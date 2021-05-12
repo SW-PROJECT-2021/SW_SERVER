@@ -79,7 +79,6 @@ module.exports = {
     available: async (res) => {
         try {
             const banners = await bannerMethod.availableBanner();
-            console.log(banners);
             res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.FIND_AVAILABLE_BANNER_SUCCESS, banners));
 
             return;
