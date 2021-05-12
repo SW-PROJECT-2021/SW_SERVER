@@ -42,19 +42,6 @@ module.exports = {
       throw err;
     }
   },
-  findByIdIncludeDel: async (id) => {
-    try {
-      const product = await Product.findOne({
-        where: {
-          id,
-        }
-      });
-
-      return product;
-    } catch (err) {
-      throw err;
-    }
-  },
   findAll: async () => {
     try {
       const products = await Product.findAll({

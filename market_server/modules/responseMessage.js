@@ -97,6 +97,13 @@ module.exports = {
   FIND_AVAILABLE_BANNER_SUCCESS: "유효한 배너 조회 성공",
   FIND_AVAILABLE_BANNER_FAIL: "유효한 배너 조회 실패",
 
+
+  /* 주문 내역 */
+
+  FIND_ALL_ORDERHISTORY_SUCCESS: "전체 주문 내역 성공",
+  FIND_ALL_ORDERHISTORY_FAIL: "전체 주문 내역 실패",
+
+
   /* 장바구니 */
   GET_BASKET_SUCCESS: "장바구니 조회 성공",
   GET_BASKET_FAIL: "장바구니 조회 실패",
