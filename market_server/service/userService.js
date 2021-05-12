@@ -7,8 +7,6 @@ const {
   sequelize
 } = require('../models');
 
-let transaction;
-
 function CheckEmail(str) {
   const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
   if (checkSpace(str)) {
@@ -88,8 +86,6 @@ module.exports = {
     }
 
     try {
-      transaction = await sequelize.transaction();
-
       const existUserId = await userMethod.readOneLoginId(loginId);
       if (existUserId) {
         console.log('해당 Id 존재');
@@ -105,7 +101,7 @@ module.exports = {
 
         return;
       }
-      const user = await userMethod.createUser(loginId, email, userName, password, transaction);
+      const user = await userMethod.createUser(loginId, email, userName, password);
 
       res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.SIGN_UP_SUCCESS, {
         loginId,
@@ -113,12 +109,10 @@ module.exports = {
         userName,
         isAdmin: user.isAdmin
       }));
-      transaction.commit();
 
       return;
     } catch (err) {
       console.error(err);
-      if (transaction) await transaction.rollback();
       res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.SIGN_UP_FAIL));
 
       return;

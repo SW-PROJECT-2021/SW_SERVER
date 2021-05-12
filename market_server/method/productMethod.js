@@ -12,8 +12,7 @@ module.exports = {
     price,
     count,
     CategoryId,
-    detail,
-    transaction) => {
+    detail) => {
     try {
       const product = await Product.create({
         name,
@@ -22,8 +21,6 @@ module.exports = {
         count,
         CategoryId,
         detail,
-      }, {
-        transaction
       });
 
       return product;
@@ -75,14 +72,13 @@ module.exports = {
       throw err;
     }
   },
-  findByOneCategory: async (CategoryId, transaction) => {
+  findByOneCategory: async (CategoryId) => {
     try {
       const products = await Product.findAll({
         where: {
           CategoryId,
           isDeleted: false
-        },
-        transaction
+        }
       });
 
       return products;
@@ -190,7 +186,7 @@ module.exports = {
     title, 
     minPrice, 
     maxPrice, 
-    transaction) => {
+    ) => {
     try {
       const products = await Product.findAll({
         where: {
@@ -202,8 +198,7 @@ module.exports = {
             [Op.gte]: minPrice
           },
           isDeleted: false
-        },
-        transaction
+        }
       });
 
       return products;
@@ -216,7 +211,7 @@ module.exports = {
     CategoryId, 
     minPrice, 
     maxPrice, 
-    transaction) => {
+    ) => {
     try {
       const products = await Product.findAll({
         where: {
@@ -229,8 +224,7 @@ module.exports = {
           },
           CategoryId,
           isDeleted: false
-        },
-        transaction
+        }
       });
 
       return products;
@@ -245,8 +239,7 @@ module.exports = {
     price,
     count,
     CategoryId,
-    detail,
-    transaction) => {
+    detail) => {
     try {
       await Product.update({
         name,
@@ -258,22 +251,20 @@ module.exports = {
       }, {
         where: {
           id
-        },
-        transaction
+        }
       });
     } catch (err) {
       throw err;
     }
   },
-  delete: async (id, transaction) => {
+  delete: async (id) => {
     try {
       await Product.update({
         isDeleted: true
       }, {
         where: {
           id
-        },
-        transaction
+        }
       });
     } catch (err) {
       throw err;

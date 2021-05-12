@@ -10,9 +10,6 @@ const {
 const { BAD_REQUEST } = require('../modules/statusCode');
 const { Utils } = require('sequelize');
 
-let transaction;
-
-
 module.exports = {
     register: async (
         name,
@@ -28,18 +25,13 @@ module.exports = {
            return;
        }
        try{
-           transaction = await sequelize.transaction();
 
-           const banner = await bannerMethod.register(name, imgFile.location, startDate, endDate, transaction);
+           const banner = await bannerMethod.register(name, imgFile.location, startDate, endDate);
            res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.REGISTER_BANNER_SUCCESS, banner));
-           transaction.commit();
-
-           
 
               return res;
        } catch(err) {
            console.error(err);
-           if (transaction) await transaction.rollback();
            res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR,responseMessage.REGISTER_BANNER_FAIL));
            return;
        }

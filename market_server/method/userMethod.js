@@ -30,7 +30,7 @@ module.exports = {
       throw err;
     }
   },
-  createUser: async (loginId, email, userName, password, transaction) => {
+  createUser: async (loginId, email, userName, password) => {
     try {
       const salt = crypto.randomBytes(64).toString('base64');
       const hashedPassword = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('base64');
@@ -40,8 +40,6 @@ module.exports = {
         password: hashedPassword,
         userName,
         salt,
-      }, {
-        transaction
       });
 
       return user;
