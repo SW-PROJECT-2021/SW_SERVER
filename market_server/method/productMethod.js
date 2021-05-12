@@ -12,6 +12,7 @@ module.exports = {
     price,
     count,
     CategoryId,
+    detail,
     transaction) => {
     try {
       const product = await Product.create({
@@ -20,6 +21,7 @@ module.exports = {
         price,
         count,
         CategoryId,
+        detail,
       }, {
         transaction
       });
@@ -33,7 +35,21 @@ module.exports = {
     try {
       const product = await Product.findOne({
         where: {
-          id
+          id,
+          isDeleted : false
+        }
+      });
+
+      return product;
+    } catch (err) {
+      throw err;
+    }
+  },
+  findByIdIncludeDel: async (id) => {
+    try {
+      const product = await Product.findOne({
+        where: {
+          id,
         }
       });
 
@@ -48,6 +64,23 @@ module.exports = {
         where: {
           isDeleted: false
         }
+      });
+
+      return products;
+    } catch (err) {
+      throw err;
+    }
+  },
+  findRecent: async () => {
+    try {
+      const products = await Product.findAll({
+        where: {
+          isDeleted: false
+        },
+        limit: 4,
+        order: [
+          ['createdAt', 'DESC'],
+        ],
       });
 
       return products;
@@ -150,6 +183,74 @@ module.exports = {
       throw err;
     }
   },
+  search: async (title) => {
+    try {
+      const products = await Product.findAll({
+        where: {
+          name: {
+            [Op.like]: "%" + title + "%"
+          },
+          isDeleted: false
+        }
+      });
+
+      return products;
+    } catch (err) {
+      throw err;
+    }
+  },
+  searchDetail: async (
+    title, 
+    minPrice, 
+    maxPrice, 
+    transaction) => {
+    try {
+      const products = await Product.findAll({
+        where: {
+          name: {
+            [Op.like]: "%" + title + "%"
+          },
+          price: {
+            [Op.lte]: maxPrice,
+            [Op.gte]: minPrice
+          },
+          isDeleted: false
+        },
+        transaction
+      });
+
+      return products;
+    } catch (err) {
+      throw err;
+    }
+  },
+  searchDetailWithCategory: async (
+    title, 
+    CategoryId, 
+    minPrice, 
+    maxPrice, 
+    transaction) => {
+    try {
+      const products = await Product.findAll({
+        where: {
+          name: {
+            [Op.like]: "%" + title + "%"
+          },
+          price: {
+            [Op.lte]: maxPrice,
+            [Op.gte]: minPrice
+          },
+          CategoryId,
+          isDeleted: false
+        },
+        transaction
+      });
+
+      return products;
+    } catch (err) {
+      throw err;
+    }
+  },
   update: async (
     id,
     name,
@@ -157,6 +258,7 @@ module.exports = {
     price,
     count,
     CategoryId,
+    detail,
     transaction) => {
     try {
       await Product.update({
@@ -165,6 +267,7 @@ module.exports = {
         price,
         count,
         CategoryId,
+        detail,
       }, {
         where: {
           id

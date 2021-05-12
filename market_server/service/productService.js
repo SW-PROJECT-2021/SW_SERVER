@@ -17,9 +17,10 @@ module.exports = {
     price,
     count,
     category,
+    detail,
     res
   ) => {
-    if (!name || !imgFile || !price || !count || !category) {
+    if (!name || !imgFile || !price || !count || !category || !detail) {
       console.log('필요값 누락');
 
       res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE));
@@ -44,7 +45,7 @@ module.exports = {
         return;
       }
 
-      const product = await productMethod.register(name, img, price, count, categoryObj.id, transaction);
+      const product = await productMethod.register(name, img, price, count, categoryObj.id, detail, transaction);
       res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.REGISTER_PRODUCT_SUCCESS, product));
       transaction.commit();
 
@@ -67,10 +68,10 @@ module.exports = {
 
     try {
       const product = await productMethod.findById(id);
-      if(!product) {
+      if (!product) {
         console.log("해당 상품이 존재하지 않습니다.");
         res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NO_EXIST_PRODUCT));
-        
+
         return;
       }
 
@@ -93,6 +94,19 @@ module.exports = {
     } catch (err) {
       console.error(err);
       res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.FIND_ALL_PRODUCTS_FAIL));
+
+      return;
+    }
+  },
+  findRecent: async (res) => {
+    try {
+      const products = await productMethod.findRecent();
+      res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.FIND_RECENT_PRODUCTS_SUCCESS, products));
+
+      return;
+    } catch (err) {
+      console.error(err);
+      res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.FIND_RECENT_PRODUCTS_FAIL));
 
       return;
     }
@@ -193,6 +207,57 @@ module.exports = {
       return;
     }
   },
+  search: async (title, res) => {
+    const searchTitle = title.trim();
+    try {
+      console.log(searchTitle);
+      const products = await productMethod.search(searchTitle);
+      res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.SEARCH_PRODUCT_SUCCESS, products));
+
+      return;
+    } catch (err) {
+      console.error(err);
+      res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.SEARCH_PRODUCT_FAIL));
+
+      return;
+    }
+  },
+  searchDetail: async (
+    title,
+    category,
+    minPrice,
+    maxPrice,
+    res) => {
+    const searchTitle = title.trim();
+    if (!minPrice) {
+      minPrice = -1;
+    }
+    if (!maxPrice) {
+      maxPrice = Number.MAX_SAFE_INTEGER;
+    }
+    try {
+      console.log(searchTitle);
+      transaction = await sequelize.transaction();
+      if (!category) {
+        const products = await productMethod.searchDetail(searchTitle, minPrice, maxPrice, transaction);
+        res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.SEARCH_DETAIL_PRODUCT_SUCCESS, products));
+
+        return;
+      }
+      const categoryObj = await categoryMethod.findByName(category, transaction);
+      const products = await productMethod.searchDetailWithCategory(searchTitle, categoryObj.id, minPrice, maxPrice, transaction);
+      res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.SEARCH_DETAIL_PRODUCT_SUCCESS, products));
+      transaction.commit();
+
+      return;
+    } catch (err) {
+      console.error(err);
+      if (transaction) await transaction.rollback();
+      res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.SEARCH_DETAIL_PRODUCT_FAIL));
+
+      return;
+    }
+  },
   updateProduct: async (
     id,
     name,
@@ -200,8 +265,9 @@ module.exports = {
     price,
     count,
     category,
+    detail,
     res) => {
-    if (!id || !name || !imgFile || !price || !count || !category) {
+    if (!id || !name || !imgFile || !price || !count || !category || !detail) {
       console.log('필요값 누락');
 
       return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE));
@@ -231,9 +297,9 @@ module.exports = {
         return;
       }
 
-      await productMethod.update(id, name, img, price, count, categoryObj.id, transaction);
+      await productMethod.update(id, name, img, price, count, categoryObj.id, detail, transaction);
       res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.UPDATE_PRODUCT_SUCCESS, {
-        "updatedId" : id
+        "updatedId": id
       }));
       transaction.commit();
 
@@ -257,7 +323,7 @@ module.exports = {
 
         return;
       }
-      
+
       await productMethod.delete(id, transaction);
       res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.DELETE_PRODUCT_SUCCESS, {
         "deletedId": id

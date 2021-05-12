@@ -21,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false,
       allowNull: false,
     },
+    detail: {
+      type: DataTypes.TEXT(),
+      allowNull: true
+    },
   }, {
     freezeTableName: true,
     timestamps: true,

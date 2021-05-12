@@ -7,7 +7,8 @@ module.exports = {
       name,
       price,
       count,
-      category
+      category,
+      detail
     } = req.body;
 
     await productService.register(
@@ -16,6 +17,7 @@ module.exports = {
       price,
       count,
       category,
+      detail,
       res);
 
     return res;
@@ -25,11 +27,16 @@ module.exports = {
       id
     } = req.params;
     await productService.findProduct(id, res);
-    
+
     return res;
   },
   findAllProduct: async (req, res) => {
     await productService.findAll(res);
+
+    return res;
+  },
+  findRecentProduct: async (req, res) => {
+    await productService.findRecent(res);
 
     return res;
   },
@@ -66,15 +73,45 @@ module.exports = {
 
     return res;
   },
+  findAllProductBySearch: async (req, res) => {
+    const {
+      title
+    } = req.query;
+    console.log("Hello! " + title);
+    await productService.search(title, res);
+    
+    return res;
+  },
+  findAllProductBySearchDetail: async (req, res) => {
+    const {
+      title,
+      category,
+      minPrice,
+      maxPrice
+    } = req.query;
+    console.log("title: " + title);
+    console.log("category: " + category);
+    console.log("minPrice: " + minPrice);
+    console.log("maxPrice: " + maxPrice);
+    await productService.searchDetail(title, category, minPrice, maxPrice, res);
+    
+    return res;
+  },
   updateProductById: async (req, res) => {
-    const imgFile = req.file;
+    let imgFile = req.file;
     const {
       id,
       name,
       price,
       count,
-      category
+      category,
+      detail,
+      img
     } = req.body;
+
+    if(!imgFile) {
+      imgFile = img;
+    }
 
     await productService.updateProduct(
       id,
@@ -83,6 +120,7 @@ module.exports = {
       price,
       count,
       category,
+      detail,
       res);
 
     return res;
@@ -92,5 +130,7 @@ module.exports = {
       id
     } = req.params;
     await productService.deleteProduct(id, res);
+
+    return res;
   }
 }
