@@ -87,7 +87,6 @@ module.exports = {
   DELETE_PRODUCT_FAIL: "상품 삭제 실패",
   
     /* 배너 */
-
   REGISTER_BANNER_SUCCESS: "배너 등록 성공",
   REGISTER_BANNER_FAIL: "배너 등록 실패",
   FIND_BANNER_BY_ID_SUCCESS: "특정 배너 조회 성공",
@@ -101,6 +100,17 @@ module.exports = {
   /* 장바구니 */
   GET_BASKET_SUCCESS: "장바구니 조회 성공",
   GET_BASKET_FAIL: "장바구니 조회 실패",
+  PUT_IN_BASKET_SUCCESS: "장바구니 추가 성공",
+  PUT_IN_BASKET_FAIL: "장바구니 추가 실패",
+  LACK_PRODUCT: "상품의 수량 부족",
+  DELETED_PRODUCT: "삭제된 상품",
+  SO_SMALL_COUNT: "너무 낮은 Count",
+  UPDATE_BASKET_SUCCESS: "장바구니 항목 수정 완료",
+  UPDATE_BASKET_FAIL: "장바구니 항목 수정 실패",
+  DELETE_BASKET_SUCCESS: "장바구니 항목 삭제 완료",
+  DELETE_BASKET_FAIL: "장바구니 항목 삭제 실패",
+  NO_EXIST_ELEMENT: "존재하지 않는 항목",
+
 
   /* 카테고리 */
   NO_CATEGORY: "존재하지 않는 카테고리",
