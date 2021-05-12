@@ -99,18 +99,10 @@ module.exports = {
   FIND_AVAILABLE_BANNER_FAIL: "유효한 배너 조회 실패",
 
 
-  
-  /* 배너 */
+  /* 주문 내역 */
 
-  REGISTER_BANNER_SUCCESS: "배너 등록 성공",
-  REGISTER_BANNER_FAIL: "배너 등록 실패",
-  FIND_BANNER_BY_ID_SUCCESS: "특정 배너 조회 성공",
-  FIND_BANNER_BY_ID_FAIL: "특정 상품 조회 실패",
-  NO_EXIST_BANNER: "존재하지 않는 상품",
-  FIND_ALL_BANNER_SUCCESS: "전체 상품 조회 성공",
-  FIND_ALL_BANNER_FAIL: "전체 상품 조회 실패",
-  FIND_AVAILABLE_BANNER_SUCCESS: "유효한 배너 조회 성공",
-  FIND_AVAILABLE_BANNER_FAIL: "유효한 배너 조회 실패",
+  FIND_ALL_ORDERHISTORY_SUCCESS: "전체 주문 내역 성공",
+  FIND_ALL_ORDERHISTORY_FAIL: "전체 주문 내역 실패",
 
 
   /* 장바구니 */
