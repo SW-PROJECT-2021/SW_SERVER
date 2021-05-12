@@ -101,6 +101,9 @@ module.exports = {
   FIND_AVAILABLE_BANNER_FAIL: "유효한 배너 조회 실패",
 
 
+  /* 장바구니 */
+  GET_BASKET_SUCCESS: "장바구니 조회 성공",
+  GET_BASKET_FAIL: "장바구니 조회 실패",
 
   /* 카테고리 */
   NO_CATEGORY: "존재하지 않는 카테고리",
