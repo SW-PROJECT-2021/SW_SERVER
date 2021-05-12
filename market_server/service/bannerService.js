@@ -29,7 +29,7 @@ module.exports = {
            const banner = await bannerMethod.register(name, imgFile.location, startDate, endDate);
            res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.REGISTER_BANNER_SUCCESS, banner));
 
-           return res;
+              return res;
        } catch(err) {
            console.error(err);
            res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR,responseMessage.REGISTER_BANNER_FAIL));
@@ -79,7 +79,6 @@ module.exports = {
     available: async (res) => {
         try {
             const banners = await bannerMethod.availableBanner();
-            console.log(banners);
             res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.FIND_AVAILABLE_BANNER_SUCCESS, banners));
 
             return;

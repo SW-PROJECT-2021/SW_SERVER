@@ -18,6 +18,9 @@ db.Category = require('./category')(sequelize, Sequelize);
 db.Basket = require('./basket')(sequelize, Sequelize);
 db.Destination = require('./destination')(sequelize, Sequelize);
 db.Banner = require('./banner')(sequelize, Sequelize);
+db.OrderHistory = require('./orderHistory')(sequelize, Sequelize);
+
+
 
 // 1 : N 관계 Category : Product
 db.Category.hasMany(db.Product);
