@@ -98,15 +98,20 @@ module.exports = {
     return res;
   },
   updateProductById: async (req, res) => {
-    const imgFile = req.file;
+    let imgFile = req.file;
     const {
       id,
       name,
       price,
       count,
       category,
-      detail
+      detail,
+      img
     } = req.body;
+
+    if(!imgFile) {
+      imgFile = img;
+    }
 
     await productService.updateProduct(
       id,
