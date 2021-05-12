@@ -8,8 +8,6 @@ const {
   sequelize
 } = require('../models');
 
-let transaction;
-
 module.exports = {
   register: async (
     name,
@@ -35,9 +33,7 @@ module.exports = {
     }
 
     try {
-      transaction = await sequelize.transaction();
-
-      const categoryObj = await categoryMethod.findByName(category, transaction);
+      const categoryObj = await categoryMethod.findByName(category);
       if (!categoryObj) {
         console.log('해당 카테고리가 존재하지 않습니다.');
         res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NO_CATEGORY));
@@ -45,14 +41,12 @@ module.exports = {
         return;
       }
 
-      const product = await productMethod.register(name, img, price, count, categoryObj.id, detail, transaction);
+      const product = await productMethod.register(name, img, price, count, categoryObj.id, detail);
       res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.REGISTER_PRODUCT_SUCCESS, product));
-      transaction.commit();
 
       return;
     } catch (err) {
       console.error(err);
-      if (transaction) await transaction.rollback();
       res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.REGISTER_PRODUCT_FAIL));
 
       return;
@@ -118,9 +112,8 @@ module.exports = {
     }
 
     try {
-      transaction = await sequelize.transaction();
 
-      const categoryObj = await categoryMethod.findByName(category, transaction);
+      const categoryObj = await categoryMethod.findByName(category);
       if (!categoryObj) {
         console.log('해당 카테고리가 존재하지 않습니다.');
         res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NO_CATEGORY));
@@ -129,14 +122,12 @@ module.exports = {
       }
 
       const categoryId = categoryObj.id;
-      const products = await productMethod.findByOneCategory(categoryId, transaction);
+      const products = await productMethod.findByOneCategory(categoryId);
       res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.FIND_ALL_PRODUCTS_BY_ONE_CATEGORY_SUCCESS, products));
-      transaction.commit();
 
       return;
     } catch (err) {
       console.error(err);
-      if (transaction) await transaction.rollback();
       res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.FIND_ALL_PRODUCTS_BY_ONE_CATEGORY_FAIL));
 
       return;
@@ -237,22 +228,19 @@ module.exports = {
     }
     try {
       console.log(searchTitle);
-      transaction = await sequelize.transaction();
       if (!category) {
-        const products = await productMethod.searchDetail(searchTitle, minPrice, maxPrice, transaction);
+        const products = await productMethod.searchDetail(searchTitle, minPrice, maxPrice);
         res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.SEARCH_DETAIL_PRODUCT_SUCCESS, products));
 
         return;
       }
-      const categoryObj = await categoryMethod.findByName(category, transaction);
-      const products = await productMethod.searchDetailWithCategory(searchTitle, categoryObj.id, minPrice, maxPrice, transaction);
+      const categoryObj = await categoryMethod.findByName(category);
+      const products = await productMethod.searchDetailWithCategory(searchTitle, categoryObj.id, minPrice, maxPrice);
       res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.SEARCH_DETAIL_PRODUCT_SUCCESS, products));
-      transaction.commit();
 
       return;
     } catch (err) {
       console.error(err);
-      if (transaction) await transaction.rollback();
       res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.SEARCH_DETAIL_PRODUCT_FAIL));
 
       return;
@@ -280,9 +268,7 @@ module.exports = {
     }
 
     try {
-      transaction = await sequelize.transaction();
-
-      const categoryObj = await categoryMethod.findByName(category, transaction);
+      const categoryObj = await categoryMethod.findByName(category);
       if (!categoryObj) {
         console.log('해당 카테고리가 존재하지 않습니다.');
         res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NO_CATEGORY));
@@ -297,16 +283,14 @@ module.exports = {
         return;
       }
 
-      await productMethod.update(id, name, img, price, count, categoryObj.id, detail, transaction);
+      await productMethod.update(id, name, img, price, count, categoryObj.id, detail);
       res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.UPDATE_PRODUCT_SUCCESS, {
         "updatedId": id
       }));
-      transaction.commit();
 
       return;
     } catch (err) {
       console.error(err);
-      if (transaction) await transaction.rollback();
       res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.UPDATE_PRODUCT_FAIL));
 
       return;
@@ -314,8 +298,6 @@ module.exports = {
   },
   deleteProduct: async (id, res) => {
     try {
-      transaction = await sequelize.transaction();
-
       const curProduct = await productMethod.findById(id);
       if (!curProduct) {
         console.log('해당 상품이 존재하지 않습니다.');
@@ -324,16 +306,14 @@ module.exports = {
         return;
       }
 
-      await productMethod.delete(id, transaction);
+      await productMethod.delete(id);
       res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.DELETE_PRODUCT_SUCCESS, {
         "deletedId": id
       }));
-      transaction.commit();
 
       return;
     } catch (err) {
       console.error(err);
-      if (transaction) await transaction.rollback();
       res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.DELETE_PRODUCT_FAIL));
 
       return;

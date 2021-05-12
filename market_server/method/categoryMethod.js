@@ -3,13 +3,12 @@ const {
 } = require('../models');
 
 module.exports = {
-  findByName: async (category, transaction) => {
+  findByName: async (category) => {
     try {
       const categoryObj = await Category.findOne({
         where: {
           title: category
-        },
-        transaction
+        }
       });
 
       return categoryObj;

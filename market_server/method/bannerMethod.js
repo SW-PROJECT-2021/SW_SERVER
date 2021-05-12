@@ -10,16 +10,13 @@ module.exports = {
         bannerName,
         bannerImg,
         bannerStartDate,
-        bannerEndDate,
-        transaction) => {
+        bannerEndDate) => {
         try {
             const banner = await Banner.create({
                 bannerName,
                 bannerImg,
                 bannerStartDate,
                 bannerEndDate,
-            }, {
-                transaction
             });
 
             return banner;
