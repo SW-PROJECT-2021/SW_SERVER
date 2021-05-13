@@ -4,10 +4,6 @@ const statusCode = require('../modules/statusCode');
 const productMethod = require('../method/productMethod');
 const categoryMethod = require('../method/categoryMethod');
 
-const {
-  sequelize
-} = require('../models');
-
 module.exports = {
   register: async (
     name,

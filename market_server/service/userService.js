@@ -3,9 +3,6 @@ const responseMessage = require('../modules/responseMessage');
 const statusCode = require('../modules/statusCode');
 const userMethod = require('../method/userMethod');
 const crypto = require('crypto');
-const {
-  sequelize
-} = require('../models');
 
 function CheckEmail(str) {
   const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
