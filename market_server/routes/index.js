@@ -2,12 +2,12 @@ var express = require('express');
 var router = express.Router();
 const auth = require('../middlewares/auth');
 
-router.use('/user', require('./user'));
-router.use('/test', auth.checkSession, require('./test'));
-router.use('/multer', auth.checkSession, auth.checkAdmin, require('./multer'));
-router.use('/product', require('./product'));
-router.use('/banner', require('./banner'));
-router.use('/basket', require('./basket'));
-router.use('/orderHistory', require('./orderHistory'));
+router.use('/api/user', require('./user'));
+router.use('/api/test', auth.checkSession, require('./test'));
+router.use('/api/multer', auth.checkSession, auth.checkAdmin, require('./multer'));
+router.use('/api/product', require('./product'));
+router.use('/api/banner', require('./banner'));
+router.use('/api/basket', require('./basket'));
+router.use('/api/orderHistory', require('./orderHistory'));
 
 module.exports = router;
