@@ -8,5 +8,6 @@ router.use('/multer', auth.checkSession, auth.checkAdmin, require('./multer'));
 router.use('/product', require('./product'));
 router.use('/banner', require('./banner'));
 router.use('/basket', require('./basket'));
+router.use('/orderHistory', require('./orderHistory'));
 
 module.exports = router;

@@ -10,6 +10,7 @@ module.exports = {
     try {
       const user = await userMethod.readOneLoginId(UserId);
       const userId = user.id;
+      
       const myBasket = await basketMethod.getBasket(userId);
       let basketList = myBasket.map(data => data.get({
         plain: true
