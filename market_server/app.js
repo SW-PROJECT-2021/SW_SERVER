@@ -32,7 +32,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(cors({
-  origin: 'http://15.164.20.183',
+  origin: true,
   credentials: true
 }));
 app.use(logger('dev'));
