@@ -118,6 +118,10 @@ module.exports = {
   DELETE_BASKET_FAIL: "장바구니 항목 삭제 실패",
   NO_EXIST_ELEMENT: "존재하지 않는 항목",
 
+  /* 배송지 */
+  ADD_DESTINATION_SUCCESS: "배송지 추가 성공",
+  ADD_DESTINATION_FAIL: "배송지 추가 실패",
+  EXIST_DESTINATION: "존재하는 배송지",
 
   /* 카테고리 */
   NO_CATEGORY: "존재하지 않는 카테고리",

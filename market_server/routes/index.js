@@ -9,5 +9,6 @@ router.use('/product', require('./product'));
 router.use('/banner', require('./banner'));
 router.use('/basket', require('./basket'));
 router.use('/orderHistory', require('./orderHistory'));
+router.use('/dest', require('./destination'));
 
 module.exports = router;
