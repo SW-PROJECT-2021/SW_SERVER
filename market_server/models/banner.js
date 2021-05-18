@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-	return sequelize.define('Banner', {
+  return sequelize.define('Banner', {
     bannerName: {
       type: DataTypes.STRING(30),
       allowNull: false,
@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false,
     },
+    bannerDetail: {
+      type: DataTypes.TEXT(),
+      allowNull: false,
+    }
   }, {
     freezeTableName: true,
     timestamps: true,
