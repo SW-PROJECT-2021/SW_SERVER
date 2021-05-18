@@ -42,7 +42,7 @@ module.exports = {
   SET_MARKETING_SUCCESS: "마케팅 수신 설정 성공",
   SET_MARKETING_FAIL: "마케팅 수신 설정 실패",
   PW_CHECK_SUCCESS: "비밀번호 일치",
-  PW_CHECK_FAIL: "비밀번호 체크 실패", 
+  PW_CHECK_FAIL: "비밀번호 체크 실패",
   CHANGE_PW_SUCCESS: "비밀번호 변경 성공",
   CHANGE_PW_FAIL: "비밀번호 변경 실패",
   GET_USER_SET_SUCCESS: "유저 계정 설정 조회 성공",
@@ -85,18 +85,23 @@ module.exports = {
   UPDATE_PRODUCT_FAIL: "상품 수정 실패",
   DELETE_PRODUCT_SUCCESS: "상품 삭제 성공",
   DELETE_PRODUCT_FAIL: "상품 삭제 실패",
-  
-    /* 배너 */
+
+  /* 배너 */
   REGISTER_BANNER_SUCCESS: "배너 등록 성공",
   REGISTER_BANNER_FAIL: "배너 등록 실패",
   FIND_BANNER_BY_ID_SUCCESS: "특정 배너 조회 성공",
   FIND_BANNER_BY_ID_FAIL: "특정 상품 조회 실패",
-  NO_EXIST_BANNER: "존재하지 않는 상품",
+  NO_EXIST_BANNER: "존재하지 않는 배너",
   FIND_ALL_BANNER_SUCCESS: "전체 상품 조회 성공",
   FIND_ALL_BANNER_FAIL: "전체 상품 조회 실패",
   FIND_AVAILABLE_BANNER_SUCCESS: "유효한 배너 조회 성공",
   FIND_AVAILABLE_BANNER_FAIL: "유효한 배너 조회 실패",
-
+  UPDATE_BANNER_SUCCESS: "배너 수정 완료",
+  UPDATE_BANNER_FAIL: "배너 수정 실패",
+  SEARCH_BANNER_BY_STARRTDATE_SUCCESS: "시작 날짜로 배너 검색 성공",
+  SEARCH_BANNER_BY_STARRTDATE_FAIL: "시작 날짜로 배너 검색 실패",
+  SORT_BANNER_SUCCESS: "배너 정렬 성공",
+  SORT_BANNER_FAIL: "배너 정렬 실패",
 
   /* 주문 내역 */
 
