@@ -8,7 +8,9 @@ const {
 module.exports = {
   register: async (
     name,
-    img,
+    img1, 
+    img2, 
+    img3,
     price,
     count,
     CategoryId,
@@ -16,7 +18,9 @@ module.exports = {
     try {
       const product = await Product.create({
         name,
-        img,
+        img1,
+        img2,
+        img3,
         price,
         count,
         CategoryId,
@@ -33,7 +37,7 @@ module.exports = {
       const product = await Product.findOne({
         where: {
           id,
-          isDeleted : false
+          // isDeleted : false
         }
       });
 
@@ -58,9 +62,9 @@ module.exports = {
   findAll: async () => {
     try {
       const products = await Product.findAll({
-        where: {
-          isDeleted: false
-        }
+        // where: {
+        //   isDeleted: false
+        // }
       });
 
       return products;
@@ -90,7 +94,7 @@ module.exports = {
       const products = await Product.findAll({
         where: {
           CategoryId,
-          isDeleted: false
+          // isDeleted: false
         }
       });
 
@@ -106,7 +110,7 @@ module.exports = {
           CategoryId: {
             [Op.or]: [1, 2]
           },
-          isDeleted: false
+          // isDeleted: false
         }
       });
 
@@ -122,7 +126,7 @@ module.exports = {
           CategoryId: {
             [Op.or]: [3, 4, 5, 6]
           },
-          isDeleted: false
+          // isDeleted: false
         }
       });
 
@@ -138,7 +142,7 @@ module.exports = {
           CategoryId: {
             [Op.or]: [7, 8, 9]
           },
-          isDeleted: false
+          // isDeleted: false
         }
       });
 
@@ -154,7 +158,7 @@ module.exports = {
           CategoryId: {
             [Op.or]: [10, 11]
           },
-          isDeleted: false
+          // isDeleted: false
         }
       });
 
@@ -170,7 +174,7 @@ module.exports = {
           CategoryId: {
             [Op.or]: [7, 8, 9, 10, 11]
           },
-          isDeleted: false
+          // isDeleted: false
         }
       });
 
@@ -186,7 +190,7 @@ module.exports = {
           name: {
             [Op.like]: "%" + title + "%"
           },
-          isDeleted: false
+          // isDeleted: false
         }
       });
 
@@ -210,7 +214,7 @@ module.exports = {
             [Op.lte]: maxPrice,
             [Op.gte]: minPrice
           },
-          isDeleted: false
+          // isDeleted: false
         }
       });
 
@@ -236,7 +240,7 @@ module.exports = {
             [Op.gte]: minPrice
           },
           CategoryId,
-          isDeleted: false
+          // isDeleted: false
         }
       });
 
@@ -248,7 +252,9 @@ module.exports = {
   update: async (
     id,
     name,
-    img,
+    img1,
+    img2,
+    img3,
     price,
     count,
     CategoryId,
@@ -256,7 +262,9 @@ module.exports = {
     try {
       await Product.update({
         name,
-        img,
+        img1,
+        img2,
+        img3,
         price,
         count,
         CategoryId,
