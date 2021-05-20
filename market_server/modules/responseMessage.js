@@ -127,6 +127,9 @@ module.exports = {
   ADD_DESTINATION_SUCCESS: "배송지 추가 성공",
   ADD_DESTINATION_FAIL: "배송지 추가 실패",
   EXIST_DESTINATION: "존재하는 배송지",
+  NO_EXIST_DESTINATION: "존재하지 않는 배송지",
+  UPDATE_DESTINATION_SUCCESS: "배송지 수정 성공",
+  UPDATE_DESTINATION_FAIL: "배송지 수정 실패",
 
   /* 카테고리 */
   NO_CATEGORY: "존재하지 않는 카테고리",

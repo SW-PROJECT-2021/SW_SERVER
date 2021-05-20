@@ -1,8 +1,11 @@
 const productService = require('../service/productService');
+const util = require('../modules/util');
+const statusCode = require('../modules/statusCode');
 
 module.exports = {
   registerProduct: async (req, res) => {
-    const imgFile = req.file;
+    const imageUrls = req.files.map(file => file.location);
+
     const {
       name,
       price,
@@ -13,7 +16,7 @@ module.exports = {
 
     await productService.register(
       name,
-      imgFile,
+      imageUrls,
       price,
       count,
       category,
@@ -98,7 +101,7 @@ module.exports = {
     return res;
   },
   updateProductById: async (req, res) => {
-    let imgFile = req.file;
+    let imageUrls = req.files.map(file => file.location);
     const {
       id,
       name,
@@ -106,17 +109,18 @@ module.exports = {
       count,
       category,
       detail,
-      img
+      imgs
     } = req.body;
 
-    if(!imgFile) {
-      imgFile = img;
+    if(imgs) {
+      imageUrls = imageUrls.concat(imgs);
+      console.log("imageUrl: " + imageUrls);
     }
 
     await productService.updateProduct(
       id,
       name,
-      imgFile,
+      imageUrls,
       price,
       count,
       category,
@@ -132,5 +136,21 @@ module.exports = {
     await productService.deleteProduct(id, res);
 
     return res;
+  },
+  uploadImgs: async (req, res) => {
+    const imageUrls = req.files.map(file => file.location);
+
+    console.log(req.files);
+    console.log(req.body);
+
+    const uploadedImgs = {
+      imageUrls: imageUrls,
+      file: req.files,
+      body: req.body
+    }
+
+    return res
+        .status(statusCode.OK)
+        .send(util.success(statusCode.OK, 'IMAGES UPLOAD SUCCESS', uploadedImgs));
   }
 }

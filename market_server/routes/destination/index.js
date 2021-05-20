@@ -5,7 +5,7 @@ const auth = require('../../middlewares/auth');
 
 // router.get('/', auth.checkSession);
 router.post('/', auth.checkSession, destController.registerDestination);
-router.put('/', auth.checkSession);
+router.put('/', auth.checkSession, destController.updateDestination);
 // router.delete('/:id', auth.checkSession);
 
 module.exports = router;

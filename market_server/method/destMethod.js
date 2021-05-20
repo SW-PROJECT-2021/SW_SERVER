@@ -43,6 +43,20 @@ module.exports = {
       throw err;
     }
   },
+  findDestById: async (id, UserId) => {
+    try {
+      const destObj = await Destination.findOne({
+        where: {
+          UserId,
+          id
+        }
+      });
+
+      return destObj;
+    } catch (err) {
+      throw err;
+    }
+  },
   getDefault: async (UserId) => {
     try {
       const destObj = await Destination.findOne({
@@ -70,5 +84,34 @@ module.exports = {
     } catch (err) {
       throw err;
     }
+  },
+  update: async (
+    UserId,
+    id,
+    name,
+    addressName,
+    zonecode,
+    address,
+    detail,
+    phone,
+    isDefault) => {
+      try {
+        await Destination.update({
+          UserId,
+          name,
+          addressName,
+          zonecode,
+          address,
+          detail,
+          phone,
+          default: isDefault
+        }, {
+          where: {
+            id
+          }
+        });
+      } catch (err) {
+        throw err;
+      }
   },
 }
