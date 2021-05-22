@@ -123,12 +123,16 @@ module.exports = {
 
     try {
       const Dest = await destMethod.findOne(id);
+      if (!Dest) {
+        console.log('해당 배송지가 존재하지 않습니다.');
+        res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.FIND_DESTINATION_BY_ID_FAIL));
+
+        return;
+      }
       res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.FIND_DESTINATION_BY_ID_SUCCESS, Dest));
 
       return;
     } catch (err) {
-      //console.log(res);
-
       res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.FIND_DESTINATION_BY_ID_FAIL));
 
       return;
