@@ -130,6 +130,12 @@ module.exports = {
   NO_EXIST_DESTINATION: "존재하지 않는 배송지",
   UPDATE_DESTINATION_SUCCESS: "배송지 수정 성공",
   UPDATE_DESTINATION_FAIL: "배송지 수정 실패",
+  FIND_DESTINATION_BY_ID_SUCCESS: "특정 배송지 조회 성공",
+  FIND_DESTINATION_BY_ID_FAIL: "특정 배송지 조회 실패",
+  FIND_ALL_MY_DESTINATION_SUCCESS: "배송지 조회 성공",
+  FIND_ALL_MY_DESTINATION_FAIL: "배송지 조회 실패",
+  DELETE_DESTINATION_SUCCESS: "배송지 삭제 성공",
+  DELETE_DESTINATION_SUCCESS: "배송지 삭제 성공",
 
   /* 카테고리 */
   NO_CATEGORY: "존재하지 않는 카테고리",

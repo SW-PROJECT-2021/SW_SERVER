@@ -38,4 +38,32 @@ module.exports = {
 
     return res;
   },
+  getByDestination: async (req, res) => {
+    const {
+      id
+    } = req.params;
+
+
+    await destService.findById(id, res);
+
+    return res;
+  },
+  getDestination: async (req, res) => {
+    const passport = req.decoded;
+    const UserId = passport.user.loginId;
+
+    await destService.findAll(UserId, res);
+
+    return res;
+  },
+  deleteDestination: async (req, res) => {
+    const {
+      id
+    } = req.params;
+
+    console.log(id);
+    await destService.delete(id, res);
+
+    return res;
+  },
 }

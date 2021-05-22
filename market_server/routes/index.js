@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const auth = require('../middlewares/auth');
+const auth = require('../middlewares/auth')
 
 router.use('/user', require('./user'));
 router.use('/test', auth.checkSession, require('./test'));
