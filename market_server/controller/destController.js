@@ -61,7 +61,6 @@ module.exports = {
       id
     } = req.params;
 
-    console.log(id);
     await destService.delete(id, res);
 
     return res;
