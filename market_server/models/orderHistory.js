@@ -1,13 +1,5 @@
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => { // 일정부분 수정
 	return sequelize.define('OrderHistory', {
-    orderProductId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    count: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
     orderDate: {
       type: DataTypes.DATE,
       allowNull: false,

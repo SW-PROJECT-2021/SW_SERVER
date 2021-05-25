@@ -8,8 +8,8 @@ const {
 module.exports = {
   register: async (
     name,
-    img1, 
-    img2, 
+    img1,
+    img2,
     img3,
     price,
     count,
@@ -200,10 +200,10 @@ module.exports = {
     }
   },
   searchDetail: async (
-    title, 
-    minPrice, 
-    maxPrice, 
-    ) => {
+    title,
+    minPrice,
+    maxPrice,
+  ) => {
     try {
       const products = await Product.findAll({
         where: {
@@ -224,11 +224,11 @@ module.exports = {
     }
   },
   searchDetailWithCategory: async (
-    title, 
-    CategoryId, 
-    minPrice, 
-    maxPrice, 
-    ) => {
+    title,
+    CategoryId,
+    minPrice,
+    maxPrice,
+  ) => {
     try {
       const products = await Product.findAll({
         where: {
@@ -273,6 +273,20 @@ module.exports = {
         where: {
           id
         }
+      });
+    } catch (err) {
+      throw err;
+    }
+  },
+  sell: async (id, count, transaction) => {
+    try {
+      await Product.update({
+        count,
+      }, {
+        where: {
+          id
+        },
+        transaction
       });
     } catch (err) {
       throw err;

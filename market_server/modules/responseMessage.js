@@ -107,7 +107,15 @@ module.exports = {
 
   FIND_ALL_ORDERHISTORY_SUCCESS: "전체 주문 내역 성공",
   FIND_ALL_ORDERHISTORY_FAIL: "전체 주문 내역 실패",
-
+  REGISTER_ORDER_SUCCESS: "주문 등록 성공",
+  REGISTER_ORDER_FAIL: "주문 등록 실패",
+  FIND_MY_ORDER_SUCCESS: "나의 주문 내역 조회 성공",
+  FIND_MY_ORDER_FAIL: "나의 주문 내역 조회 실패",
+  SEARCH_MY_ORDER_SUCCESS: "나의 주문 내역 기간으로 검색 성공",
+  SEARCH_MY_ORDER_FAIL: "나의 주문 내역 기간으로 검색 실패",
+  SEARCH_ALL_ORDER_SUCCESS: "모든 주문 내역 기간으로 검색 성공",
+  SEARCH_ALL_ORDER_FAIL: "모든 주문 내역 기간으로 검색 실패",
+  INVALID_DATE_INPUT: "입력 날짜 이상",
 
   /* 장바구니 */
   GET_BASKET_SUCCESS: "장바구니 조회 성공",
