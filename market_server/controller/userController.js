@@ -30,7 +30,7 @@ module.exports = {
       id
     } = req.params;
     await userService.checkId(id, res);
-    
+
     return res;
   },
   checkEmailIfExist: async (req, res) => {

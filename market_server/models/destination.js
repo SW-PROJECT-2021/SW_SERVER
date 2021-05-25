@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     zonecode: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(100),
       allowNull: false,
     },
     address: {

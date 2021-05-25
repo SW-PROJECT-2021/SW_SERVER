@@ -30,6 +30,19 @@ module.exports = {
       throw err;
     }
   },
+  findById: async (id) => {
+    try {
+      const alreadyUser = await User.findOne({
+        where: {
+          id
+        }
+      });
+
+      return alreadyUser;
+    } catch (err) {
+      throw err;
+    }
+  },
   createUser: async (loginId, email, userName, password) => {
     try {
       const salt = crypto.randomBytes(64).toString('base64');

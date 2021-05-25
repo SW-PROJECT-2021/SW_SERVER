@@ -14,8 +14,8 @@ const {
 } = require('./models');
 
 sequelize.sync({
-    alter: false
-  })
+  alter: false
+})
   .then(() => {
     console.log('데이터베이스 연결 성공.');
   })
@@ -57,7 +57,7 @@ app.use(function (req, res, next) {
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res, next){
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

@@ -6,6 +6,7 @@ const responseMessage = require('../../modules/responseMessage');
 const statusCode = require('../../modules/statusCode');
 const userController = require('../../controller/userController');
 const userMethod = require('../../method/userMethod');
+const auth = require('../../middlewares/auth');
 
 router.get('/fail', (req, res) => {
   return res.status(statusCode.UNAUTHORIZED).send(util.fail(statusCode.UNAUTHORIZED, responseMessage.SIGN_IN_FAIL));
@@ -39,10 +40,13 @@ router.post('/login',
 router.get('/logout', (req, res) => {
   req.logout();
   req.session.destroy();
-  res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.USER_LOGOUT));
+  return res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.USER_LOGOUT));
 });
 router.get('/check/id/:id', userController.checkIdIfExist);
 router.get('/check/email/:email', userController.checkEmailIfExist);
 router.post('/signup', userController.signup);
+router.get('/check/admin', auth.checkSession, auth.checkAdmin, (req, res) => {
+  return res.status(statusCode.OK).send(util.success(statusCode.OK, "관리자입니다.", "관리자입니다."));
+});
 
 module.exports = router;

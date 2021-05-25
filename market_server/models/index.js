@@ -19,7 +19,7 @@ db.Basket = require('./basket')(sequelize, Sequelize);
 db.Destination = require('./destination')(sequelize, Sequelize);
 db.Banner = require('./banner')(sequelize, Sequelize);
 db.OrderHistory = require('./orderHistory')(sequelize, Sequelize);
-
+db.Orders = require('./orders')(sequelize, Sequelize);
 
 
 // 1 : N 관계 Category : Product
@@ -37,5 +37,13 @@ db.Basket.belongsTo(db.User);
 // 1 : N 관계 User : Destination
 db.User.hasMany(db.Destination);
 db.Destination.belongsTo(db.User);
+
+// 1 : N 관계 User : OrderHistory
+db.User.hasMany(db.OrderHistory);
+db.OrderHistory.belongsTo(db.User);
+
+// M : N 관계 
+db.OrderHistory.belongsToMany(db.Product, { through: 'Orders', as: 'Ordered' }); // OrderHistory가 봤을때 Product는 Ordered!
+db.Product.belongsToMany(db.OrderHistory, { through: 'Orders', as: 'Orderer' }); // Product가 봤을때 OrderHistory는 Orderer!
 
 module.exports = db;

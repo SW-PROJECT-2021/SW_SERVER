@@ -7,7 +7,8 @@ module.exports = {
         const {
             name,
             startDate,
-            endDate
+            endDate,
+            detail
         } = req.body;
 
         await bannerService.register(
@@ -15,9 +16,10 @@ module.exports = {
             imgFile,
             startDate,
             endDate,
+            detail,
             res);
 
-            return res;
+        return res;
     },
 
     findBannerById: async (req, res) => {
@@ -25,18 +27,65 @@ module.exports = {
             id
         } = req.params;
         await bannerService.findBanner(id, res);
-        
+
         return res;
     },
-    findAllBanner: async  (req, res) => {
+    findAllBanner: async (req, res) => {
         await bannerService.findAll(res);
 
         return res;
     },
-    availableBanner:async (req, res) => {
+    availableBanner: async (req, res) => {
         await bannerService.available(res);
 
         return res;
-    }
+    },
+    updateBannerById: async (req, res) => {
+        let imgFile = req.file;
+        const {
+            id,
+            name,
+            startDate,
+            endDate,
+            detail,
+            img
+        } = req.body;
+        if (!imgFile) {
+            imgFile = img;
+        }
+
+        await bannerService.updateBanner(
+            id,
+            name,
+            imgFile,
+            startDate,
+            endDate,
+            detail,
+            res);
+
+        return res;
+    },
+    searchBannerByStartDate: async (req, res) => {
+        const {
+            startDate
+        } = req.params;
+
+        await bannerService.searchByDate(startDate, res);
+
+        return res;
+    },
+    sortBanner: async (req, res) => {
+        const {
+            sort,
+            direction,
+        } = req.body;
+
+        await bannerService.sortBanner(
+            sort,
+            direction,
+            res);
+
+        return res;
+    },
 
 }
