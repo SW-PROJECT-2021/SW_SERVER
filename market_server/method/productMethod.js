@@ -14,7 +14,8 @@ module.exports = {
     price,
     count,
     CategoryId,
-    detail) => {
+    detail,
+    delivery) => {
     try {
       const product = await Product.create({
         name,
@@ -25,6 +26,7 @@ module.exports = {
         count,
         CategoryId,
         detail,
+        delivery
       });
 
       return product;
@@ -258,7 +260,8 @@ module.exports = {
     price,
     count,
     CategoryId,
-    detail) => {
+    detail,
+    delivery) => {
     try {
       await Product.update({
         name,
@@ -269,6 +272,7 @@ module.exports = {
         count,
         CategoryId,
         detail,
+        delivery
       }, {
         where: {
           id

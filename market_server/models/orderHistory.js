@@ -4,15 +4,15 @@ module.exports = (sequelize, DataTypes) => { // 일정부분 수정
       type: DataTypes.DATE,
       allowNull: false,
     },
-    orderStatus: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     orderDestination: {
       type: DataTypes.STRING(30),
       allowNull: false,
     },
-
+    orderDelivery: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: true
+    },
   }, {
     freezeTableName: true,
     timestamps: true,

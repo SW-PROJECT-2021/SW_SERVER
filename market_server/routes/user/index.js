@@ -21,7 +21,7 @@ router.get('/testSession', (req, res) => {
 });
 router.post('/login',
   passport.authenticate('local', {
-    failureRedirect: '/user/fail'
+    failureRedirect: '/api/user/fail'
   }),
   async (req, res) => {
     const {
