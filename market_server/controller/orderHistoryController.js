@@ -9,14 +9,21 @@ module.exports = {
     const UserId = passport.user.loginId;
 
     await orderHistoryService.findOrderHistory(UserId, res);
-    
+
     return res;
   },
   getAllOrder: async (req, res) => {
     await orderHistoryService.findAllOrder(res);
     return res;
   },
-  searchByDateMyOrder: async(req, res) => {
+  searchByIdMyOrder: async (req, res) => {
+    const {
+      id
+    } = req.params;
+    await orderHistoryService.searchById(id, res);
+    return res;
+  },
+  searchByDateMyOrder: async (req, res) => {
     const passport = req.decoded;
     const UserId = passport.user.loginId;
     const {
@@ -32,7 +39,7 @@ module.exports = {
 
     return res;
   },
-  searchByDateAllOrder: async(req, res) => {
+  searchByDateAllOrder: async (req, res) => {
     const {
       startDate,
       endDate
@@ -63,4 +70,16 @@ module.exports = {
 
     return res;
   },
+  raiseStatus: async (req, res) => {
+    const {
+      id,
+    } = req.body;
+
+    await orderHistoryService.raise(
+      id,
+      res);
+
+    return res;
+  },
+
 }
