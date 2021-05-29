@@ -43,6 +43,19 @@ module.exports = {
       throw err;
     }
   },
+  searchById: async (id) => {
+    try {
+      const orderHistroyObj = await OrderHistory.findOne({
+        where: {
+          id
+        },
+      });
+
+      return orderHistroyObj;
+    } catch (err) {
+      throw err;
+    }
+  },
   searchByDate: async (UserId, startDate, endDate) => {
     try {
       const orderHistroyObj = await OrderHistory.findAll({
@@ -98,6 +111,21 @@ module.exports = {
         orderStatus: 1
       }, transaction);
 
+      return orders;
+    } catch (err) {
+      throw err;
+    }
+  },
+  raise: async (id, orderStatus) => {
+    try {
+      const orders = await OrderHistory.update({
+        id,
+        orderStatus
+      }, {
+        where: {
+          id
+        }
+      });
       return orders;
     } catch (err) {
       throw err;
