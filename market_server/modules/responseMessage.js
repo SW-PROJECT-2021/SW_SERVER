@@ -111,11 +111,18 @@ module.exports = {
   REGISTER_ORDER_FAIL: "주문 등록 실패",
   FIND_MY_ORDER_SUCCESS: "나의 주문 내역 조회 성공",
   FIND_MY_ORDER_FAIL: "나의 주문 내역 조회 실패",
+  SEARCH_ORDER_BY_ID_SUCCESS: "ID로 주문 내역 검색 성공",
+  SEARCH_ORDER_BY_ID_FAIL: "ID로 주문 내역 검색 실패",
+  NO_EXIST_ORDER: "존재 하지 않는 주문 내역",
   SEARCH_MY_ORDER_SUCCESS: "나의 주문 내역 기간으로 검색 성공",
   SEARCH_MY_ORDER_FAIL: "나의 주문 내역 기간으로 검색 실패",
   SEARCH_ALL_ORDER_SUCCESS: "모든 주문 내역 기간으로 검색 성공",
   SEARCH_ALL_ORDER_FAIL: "모든 주문 내역 기간으로 검색 실패",
+  UPDATAE_STATUS_SUCCESS: "STATUS 수정 완료",
+  UPDATE_STATUS_FAIL: "STATUS 수정 실패",
   INVALID_DATE_INPUT: "입력 날짜 이상",
+  INVALID_STAUTS: "현재 STATUS 4 이상",
+
 
   /* 장바구니 */
   GET_BASKET_SUCCESS: "장바구니 조회 성공",
@@ -138,6 +145,12 @@ module.exports = {
   NO_EXIST_DESTINATION: "존재하지 않는 배송지",
   UPDATE_DESTINATION_SUCCESS: "배송지 수정 성공",
   UPDATE_DESTINATION_FAIL: "배송지 수정 실패",
+  FIND_DESTINATION_BY_ID_SUCCESS: "특정 배송지 조회 성공",
+  FIND_DESTINATION_BY_ID_FAIL: "특정 배송지 조회 실패",
+  FIND_ALL_MY_DESTINATION_SUCCESS: "배송지 조회 성공",
+  FIND_ALL_MY_DESTINATION_FAIL: "배송지 조회 실패",
+  DELETE_DESTINATION_SUCCESS: "배송지 삭제 성공",
+  DELETE_DESTINATION_SUCCESS: "배송지 삭제 성공",
 
   /* 카테고리 */
   NO_CATEGORY: "존재하지 않는 카테고리",

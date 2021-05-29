@@ -12,22 +12,22 @@ module.exports = {
     detail,
     phone,
     isDefault) => {
-      try {
-        const destination = await Destination.create({
-          UserId,
-          name,
-          addressName,
-          zonecode,
-          address,
-          detail,
-          phone,
-          default: isDefault
-        });
+    try {
+      const destination = await Destination.create({
+        UserId,
+        name,
+        addressName,
+        zonecode,
+        address,
+        detail,
+        phone,
+        default: isDefault
+      });
 
-        return destination;
-      } catch (err) {
-        throw err;
-      }
+      return destination;
+    } catch (err) {
+      throw err;
+    }
   },
   findDest: async (addressName, UserId) => {
     try {
@@ -95,23 +95,58 @@ module.exports = {
     detail,
     phone,
     isDefault) => {
-      try {
-        await Destination.update({
-          UserId,
-          name,
-          addressName,
-          zonecode,
-          address,
-          detail,
-          phone,
-          default: isDefault
-        }, {
-          where: {
-            id
-          }
-        });
-      } catch (err) {
-        throw err;
-      }
+    try {
+      await Destination.update({
+        UserId,
+        name,
+        addressName,
+        zonecode,
+        address,
+        detail,
+        phone,
+        default: isDefault
+      }, {
+        where: {
+          id
+        }
+      });
+    } catch (err) {
+      throw err;
+    }
+  },
+  findOne: async (id) => {
+    try {
+      const destination = await Destination.findOne({
+        where: {
+          id
+        }
+      });
+      return destination;
+    } catch (err) {
+      throw err;
+    }
+  },
+  findAll: async (UserId) => {
+    try {
+      const destinations = await Destination.findAll({
+        where: {
+          UserId
+        }
+      });
+      return destinations;
+    } catch (err) {
+      throw err;
+    }
+  },
+  delete: async (id) => {
+    try {
+      await Destination.destroy({
+        where: {
+          id
+        }
+      });
+    } catch (err) {
+      throw err;
+    }
   },
 }
