@@ -79,6 +79,10 @@ module.exports = {
 
         try {
             const myOrder = await orderHistoryMethod.searchById(id);
+            if (!myOrder) {
+                console.log('존재하지 않는 주문 내역');
+                return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NO_EXIST_ORDER));
+            }
             res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.SEARCH_ORDER_BY_ID_SUCCESS, myOrder));
 
             return;
@@ -225,6 +229,11 @@ module.exports = {
 
         try {
             const myOrder = await orderHistoryMethod.searchById(id);
+            if (!myOrder) {
+                console.log('존재하지 않는 주문 내역');
+                return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NO_EXIST_ORDER));
+            }
+
             const status = myOrder.orderStatus;
             if (status >= 4) {
                 console.log('Status 증가 불가능');
