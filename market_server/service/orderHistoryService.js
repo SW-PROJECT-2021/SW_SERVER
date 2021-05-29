@@ -69,6 +69,26 @@ module.exports = {
             return;
         }
     },
+    searchById: async (
+        id,
+        res) => {
+        if (!id) {
+            console.log('필요값 누락');
+            return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE));
+        }
+
+        try {
+            const myOrder = await orderHistoryMethod.searchById(id);
+            res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.SEARCH_ORDER_BY_ID_SUCCESS, myOrder));
+
+            return;
+        } catch (err) {
+            console.error(err);
+            res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.SEARCH_ORDER_BY_ID_FAIL));
+
+            return;
+        }
+    },
     searchByDate: async (
         UserId,
         startDate,
@@ -84,7 +104,7 @@ module.exports = {
             const userId = user.id;
             const stDate = new Date(startDate);
             const edDate = new Date(endDate);
-            if(stDate > edDate) {
+            if (stDate > edDate) {
                 console.log('날짜 입력 이상');
                 return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.INVALID_DATE_INPUT));
             }
@@ -101,7 +121,7 @@ module.exports = {
             res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.SEARCH_MY_ORDER_SUCCESS, processedOrder));
 
             return;
-        } catch(err) {
+        } catch (err) {
             console.error(err);
             res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.SEARCH_MY_ORDER_FAIL));
 
@@ -120,7 +140,7 @@ module.exports = {
         try {
             const stDate = new Date(startDate);
             const edDate = new Date(endDate);
-            if(stDate > edDate) {
+            if (stDate > edDate) {
                 console.log('날짜 입력 이상');
                 return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.INVALID_DATE_INPUT));
             }
@@ -139,7 +159,7 @@ module.exports = {
             res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.SEARCH_ALL_ORDER_SUCCESS, processedOrder));
 
             return;
-        } catch(err) {
+        } catch (err) {
             console.error(err);
             res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.SEARCH_MY_ORDER_FAIL));
 
@@ -194,5 +214,34 @@ module.exports = {
             if (transaction) await transaction.rollback();
             return res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.REGISTER_ORDER_FAIL));
         }
-    }
+    },
+    raise: async (
+        id,
+        res) => {
+        if (!id) {
+            console.log('필요값 누락');
+            return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE));
+        }
+
+        try {
+            const myOrder = await orderHistoryMethod.searchById(id);
+            const status = myOrder.orderStatus;
+            if (status >= 4) {
+                console.log('Status 증가 불가능');
+                return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.INVALID_STAUTS))
+            }
+            await orderHistoryMethod.raise(
+                id,
+                status + 1
+            );
+            res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.UPDATAE_STATUS_SUCCESS, { "updatedId": id, "status": status + 1 }));
+
+            return;
+        } catch (err) {
+            console.error(err);
+            res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.UPDATE_STATUS_FAIL));
+
+            return;
+        }
+    },
 }
