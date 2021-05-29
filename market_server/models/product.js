@@ -33,6 +33,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT(),
       allowNull: true
     },
+    delivery: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: true
+    },
   }, {
     freezeTableName: true,
     timestamps: true,

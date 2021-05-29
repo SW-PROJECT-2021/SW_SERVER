@@ -4,7 +4,7 @@ const statusCode = require('../modules/statusCode');
 const orderHistoryMethod = require('../method/orderHistoryMethod');
 const userMethod = require('../method/userMethod');
 const productMethod = require('../method/productMethod');
-const ordersMethod = require('../method/OrdersMethod');
+const ordersMethod = require('../method/ordersMethod');
 const {
     sequelize
 } = require('../models');
@@ -31,6 +31,8 @@ module.exports = {
             }));
             for (element of processedOrder) {
                 for (let orders of element.Ordered) {
+                    const order = await ordersMethod.getOrder(element.id, orders.id);
+                    orders.orderStatus = order.status;
                     orders.count = orders.Orders.productCount;
                     delete orders.Orders;
                 }
@@ -55,6 +57,8 @@ module.exports = {
                 const user = await userMethod.findById(element.UserId);
                 element.UserId = user.loginId;
                 for (let orders of element.Ordered) {
+                    const order = await ordersMethod.getOrder(element.id, orders.id);
+                    orders.orderStatus = order.status;
                     orders.count = orders.Orders.productCount;
                     delete orders.Orders;
                 }
@@ -118,6 +122,8 @@ module.exports = {
             }));
             for (element of processedOrder) {
                 for (let orders of element.Ordered) {
+                    const order = await ordersMethod.getOrder(element.id, orders.id);
+                    orders.orderStatus = order.status;
                     orders.count = orders.Orders.productCount;
                     delete orders.Orders;
                 }
@@ -156,6 +162,8 @@ module.exports = {
                 const user = await userMethod.findById(element.UserId);
                 element.UserId = user.loginId;
                 for (let orders of element.Ordered) {
+                    const order = await ordersMethod.getOrder(element.id, orders.id);
+                    orders.orderStatus = order.status;
                     orders.count = orders.Orders.productCount;
                     delete orders.Orders;
                 }
@@ -185,8 +193,12 @@ module.exports = {
             transaction = await sequelize.transaction();
             const user = await userMethod.readOneLoginId(UserId);
             const userId = user.id;
+            let orderDelivery = 0;
             for (element of productList) {
                 const product = await productMethod.findById(element.ProductId);
+                if (product.delivery > orderDelivery) {
+                    orderDelivery = product.delivery;
+                }
                 if (!product || product.isDeleted) {
                     console.log("해당 상품이 존재하지 않습니다.")
                     res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NO_EXIST_PRODUCT));
@@ -202,7 +214,7 @@ module.exports = {
                 await productMethod.sell(product.id, product.count - element.productCount, transaction);
             }
 
-            const orderHistoryObj = await orderHistoryMethod.register(userId, orderDate, orderDestination, transaction);
+            const orderHistoryObj = await orderHistoryMethod.register(userId, orderDate, orderDestination, orderDelivery, transaction);
             for (element of productList) {
                 element.OrderHistoryId = orderHistoryObj.id;
                 console.log(element);
@@ -220,30 +232,36 @@ module.exports = {
         }
     },
     raise: async (
-        id,
+        orderHistoryId,
+        productId,
         res) => {
-        if (!id) {
+        if (!orderHistoryId || !productId) {
             console.log('필요값 누락');
             return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE));
         }
 
         try {
-            const myOrder = await orderHistoryMethod.searchById(id);
+            const myOrder = await ordersMethod.getOrder(orderHistoryId, productId);
             if (!myOrder) {
                 console.log('존재하지 않는 주문 내역');
                 return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NO_EXIST_ORDER));
             }
 
-            const status = myOrder.orderStatus;
+            const status = myOrder.status;
             if (status >= 4) {
                 console.log('Status 증가 불가능');
                 return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.INVALID_STAUTS))
             }
-            await orderHistoryMethod.raise(
-                id,
+            await ordersMethod.raise(
+                orderHistoryId,
+                productId,
                 status + 1
             );
-            res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.UPDATAE_STATUS_SUCCESS, { "updatedId": id, "status": status + 1 }));
+            res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.UPDATAE_STATUS_SUCCESS, {
+                "updatedOrderHistoryId": orderHistoryId,
+                "productId": productId,
+                "status": status + 1
+            }));
 
             return;
         } catch (err) {
