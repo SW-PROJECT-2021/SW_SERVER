@@ -89,13 +89,13 @@ module.exports = {
       throw err;
     }
   },
-  register: async (UserId, orderDate, orderDestination, transaction) => {
+  register: async (UserId, orderDate, orderDestination, orderDelivery, transaction) => {
     try {
       const orders = await OrderHistory.create({
         UserId,
         orderDate,
         orderDestination,
-        orderStatus: 1
+        orderDelivery,
       }, transaction);
 
       return orders;

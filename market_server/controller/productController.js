@@ -11,7 +11,8 @@ module.exports = {
       price,
       count,
       category,
-      detail
+      detail,
+      delivery
     } = req.body;
 
     await productService.register(
@@ -21,6 +22,7 @@ module.exports = {
       count,
       category,
       detail,
+      delivery,
       res);
 
     return res;
@@ -109,7 +111,8 @@ module.exports = {
       count,
       category,
       detail,
-      imgs
+      imgs,
+      delivery
     } = req.body;
 
     if(imgs) {
@@ -125,6 +128,7 @@ module.exports = {
       count,
       category,
       detail,
+      delivery,
       res);
 
     return res;

@@ -12,9 +12,10 @@ module.exports = {
     count,
     category,
     detail,
+    delivery,
     res
   ) => {
-    if (!name || imageUrls.length < 1 || !price || !count || !category || !detail) {
+    if (!name || imageUrls.length < 1 || !price || !count || !category || !detail || !delivery) {
       console.log('필요값 누락');
 
       res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE));
@@ -39,7 +40,7 @@ module.exports = {
         return;
       }
 
-      const product = await productMethod.register(name, img1, img2, img3, price, count, categoryObj.id, detail);
+      const product = await productMethod.register(name, img1, img2, img3, price, count, categoryObj.id, detail, delivery);
       res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.REGISTER_PRODUCT_SUCCESS, product));
 
       return;
@@ -252,8 +253,9 @@ module.exports = {
     count,
     category,
     detail,
+    delivery,
     res) => {
-    if (!id || !name || imageUrls.length < 1 || !price || !count || !category || !detail) {
+    if (!id || !name || imageUrls.length < 1 || !price || !count || !category || !detail || !delivery) {
       console.log('필요값 누락');
 
       return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE));
@@ -282,7 +284,7 @@ module.exports = {
       const img1 = imageUrls[0];
       const img2 = imageUrls[1];
       const img3 = imageUrls[2];
-      await productMethod.update(id, name, img1, img2, img3, price, count, categoryObj.id, detail);
+      await productMethod.update(id, name, img1, img2, img3, price, count, categoryObj.id, detail, delivery);
       res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.UPDATE_PRODUCT_SUCCESS, {
         "updatedId": id
       }));

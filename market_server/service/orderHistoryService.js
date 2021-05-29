@@ -4,7 +4,7 @@ const statusCode = require('../modules/statusCode');
 const orderHistoryMethod = require('../method/orderHistoryMethod');
 const userMethod = require('../method/userMethod');
 const productMethod = require('../method/productMethod');
-const ordersMethod = require('../method/OrdersMethod');
+const ordersMethod = require('../method/ordersMethod');
 const {
     sequelize
 } = require('../models');
@@ -31,6 +31,8 @@ module.exports = {
             }));
             for (element of processedOrder) {
                 for (let orders of element.Ordered) {
+                    const order = await ordersMethod.getOrder(element.id, orders.id);
+                    orders.orderStatus = order.status;
                     orders.count = orders.Orders.productCount;
                     delete orders.Orders;
                 }
@@ -55,6 +57,8 @@ module.exports = {
                 const user = await userMethod.findById(element.UserId);
                 element.UserId = user.loginId;
                 for (let orders of element.Ordered) {
+                    const order = await ordersMethod.getOrder(element.id, orders.id);
+                    orders.orderStatus = order.status;
                     orders.count = orders.Orders.productCount;
                     delete orders.Orders;
                 }
@@ -84,7 +88,7 @@ module.exports = {
             const userId = user.id;
             const stDate = new Date(startDate);
             const edDate = new Date(endDate);
-            if(stDate > edDate) {
+            if (stDate > edDate) {
                 console.log('날짜 입력 이상');
                 return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.INVALID_DATE_INPUT));
             }
@@ -94,6 +98,8 @@ module.exports = {
             }));
             for (element of processedOrder) {
                 for (let orders of element.Ordered) {
+                    const order = await ordersMethod.getOrder(element.id, orders.id);
+                    orders.orderStatus = order.status;
                     orders.count = orders.Orders.productCount;
                     delete orders.Orders;
                 }
@@ -101,7 +107,7 @@ module.exports = {
             res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.SEARCH_MY_ORDER_SUCCESS, processedOrder));
 
             return;
-        } catch(err) {
+        } catch (err) {
             console.error(err);
             res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.SEARCH_MY_ORDER_FAIL));
 
@@ -120,7 +126,7 @@ module.exports = {
         try {
             const stDate = new Date(startDate);
             const edDate = new Date(endDate);
-            if(stDate > edDate) {
+            if (stDate > edDate) {
                 console.log('날짜 입력 이상');
                 return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.INVALID_DATE_INPUT));
             }
@@ -132,6 +138,8 @@ module.exports = {
                 const user = await userMethod.findById(element.UserId);
                 element.UserId = user.loginId;
                 for (let orders of element.Ordered) {
+                    const order = await ordersMethod.getOrder(element.id, orders.id);
+                    orders.orderStatus = order.status;
                     orders.count = orders.Orders.productCount;
                     delete orders.Orders;
                 }
@@ -139,7 +147,7 @@ module.exports = {
             res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.SEARCH_ALL_ORDER_SUCCESS, processedOrder));
 
             return;
-        } catch(err) {
+        } catch (err) {
             console.error(err);
             res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.SEARCH_MY_ORDER_FAIL));
 
@@ -161,8 +169,12 @@ module.exports = {
             transaction = await sequelize.transaction();
             const user = await userMethod.readOneLoginId(UserId);
             const userId = user.id;
+            let orderDelivery = 0;
             for (element of productList) {
                 const product = await productMethod.findById(element.ProductId);
+                if (product.delivery > orderDelivery) {
+                    orderDelivery = product.delivery;
+                }
                 if (!product || product.isDeleted) {
                     console.log("해당 상품이 존재하지 않습니다.")
                     res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NO_EXIST_PRODUCT));
@@ -178,7 +190,7 @@ module.exports = {
                 await productMethod.sell(product.id, product.count - element.productCount, transaction);
             }
 
-            const orderHistoryObj = await orderHistoryMethod.register(userId, orderDate, orderDestination, transaction);
+            const orderHistoryObj = await orderHistoryMethod.register(userId, orderDate, orderDestination, orderDelivery, transaction);
             for (element of productList) {
                 element.OrderHistoryId = orderHistoryObj.id;
                 console.log(element);

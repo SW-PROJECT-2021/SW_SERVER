@@ -1,7 +1,10 @@
-const { Product, OrderHistory } = require('./index');
+const {
+  Product,
+  OrderHistory
+} = require('./index');
 
 module.exports = (sequelize, DataTypes) => {
-	return sequelize.define('Orders', {
+  return sequelize.define('Orders', {
     ProductId: {
       type: DataTypes.INTEGER,
       reference: {
@@ -18,6 +21,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     productCount: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    status: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
       allowNull: false,
     },
   }, {
