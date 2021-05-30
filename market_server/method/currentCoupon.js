@@ -43,4 +43,18 @@ module.exports = {
             throw err;
         }
     },
+    available: async (CouponId, UserId) => {
+        try {
+            const Coupons = await CurrentCoupon.findOne({
+                where: {
+                    CouponId,
+                    UserId
+                },
+            });
+
+            return Coupons;
+        } catch (err) {
+            throw err;
+        }
+    },
 }

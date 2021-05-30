@@ -3,17 +3,69 @@ const {
 } = require('../models');
 
 module.exports = {
-    register: async (
+    registerAll: async (
         couponName,
         couponCode,
+        isAllCoupon,
         minimumPrice,
-        discountRate,) => {
+        discount,) => {
         try {
             const coupon = await Coupon.create({
                 couponName,
                 couponCode,
+                isAllCoupon,
                 minimumPrice,
-                discountRate,
+                discount,
+            });
+
+            return coupon;
+        } catch (err) {
+            throw err;
+        }
+    },
+    register: async (
+        couponName,
+        couponCode,
+        isAllCoupon,
+        discount,
+        categoryId,
+        maximumDiscount) => {
+        try {
+            const coupon = await Coupon.create({
+                couponName,
+                couponCode,
+                isAllCoupon,
+                discount,
+                categoryId,
+                maximumDiscount
+            });
+
+            return coupon;
+        } catch (err) {
+            throw err;
+        }
+    },
+    searchByCode: async (
+        couponCode) => {
+        try {
+            const coupon = await Coupon.findOne({
+                where: {
+                    couponCode
+                }
+            });
+
+            return coupon;
+        } catch (err) {
+            throw err;
+        }
+    },
+    searchByCouponId: async (
+        id) => {
+        try {
+            const coupon = await Coupon.findOne({
+                where: {
+                    id
+                }
             });
 
             return coupon;
