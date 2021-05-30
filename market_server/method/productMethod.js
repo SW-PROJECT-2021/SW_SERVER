@@ -40,7 +40,8 @@ module.exports = {
         where: {
           id,
           // isDeleted : false
-        }
+        },
+        raw: true
       });
 
       return product;
