@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataTypes) => { // 일정부분 수정
-	return sequelize.define('OrderHistory', {
+  return sequelize.define('OrderHistory', {
     orderDate: {
       type: DataTypes.DATE,
       allowNull: false,
     },
     orderDestination: {
-        type: DataTypes.STRING(30),
-        allowNull: false,
+      type: DataTypes.STRING(30),
+      allowNull: false,
     },
     orderDelivery: {
       type: DataTypes.INTEGER,
