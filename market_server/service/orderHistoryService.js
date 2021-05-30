@@ -31,8 +31,6 @@ module.exports = {
             }));
             for (element of processedOrder) {
                 for (let orders of element.Ordered) {
-                    const order = await ordersMethod.getOrder(element.id, orders.id);
-                    orders.orderStatus = order.status;
                     orders.count = orders.Orders.productCount;
                     delete orders.Orders;
                 }
@@ -57,8 +55,6 @@ module.exports = {
                 const user = await userMethod.findById(element.UserId);
                 element.UserId = user.loginId;
                 for (let orders of element.Ordered) {
-                    const order = await ordersMethod.getOrder(element.id, orders.id);
-                    orders.orderStatus = order.status;
                     orders.count = orders.Orders.productCount;
                     delete orders.Orders;
                 }
@@ -122,8 +118,6 @@ module.exports = {
             }));
             for (element of processedOrder) {
                 for (let orders of element.Ordered) {
-                    const order = await ordersMethod.getOrder(element.id, orders.id);
-                    orders.orderStatus = order.status;
                     orders.count = orders.Orders.productCount;
                     delete orders.Orders;
                 }
@@ -162,8 +156,6 @@ module.exports = {
                 const user = await userMethod.findById(element.UserId);
                 element.UserId = user.loginId;
                 for (let orders of element.Ordered) {
-                    const order = await ordersMethod.getOrder(element.id, orders.id);
-                    orders.orderStatus = order.status;
                     orders.count = orders.Orders.productCount;
                     delete orders.Orders;
                 }
@@ -232,36 +224,30 @@ module.exports = {
         }
     },
     raise: async (
-        orderHistoryId,
-        productId,
+        id,
         res) => {
-        if (!orderHistoryId || !productId) {
+        if (!id) {
             console.log('필요값 누락');
             return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE));
         }
 
         try {
-            const myOrder = await ordersMethod.getOrder(orderHistoryId, productId);
+            const myOrder = await orderHistoryMethod.searchById(id);
             if (!myOrder) {
                 console.log('존재하지 않는 주문 내역');
                 return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NO_EXIST_ORDER));
             }
 
-            const status = myOrder.status;
+            const status = myOrder.orderStatus;
             if (status >= 4) {
                 console.log('Status 증가 불가능');
                 return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.INVALID_STAUTS))
             }
-            await ordersMethod.raise(
-                orderHistoryId,
-                productId,
+            await orderHistoryMethod.raise(
+                id,
                 status + 1
             );
-            res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.UPDATAE_STATUS_SUCCESS, {
-                "updatedOrderHistoryId": orderHistoryId,
-                "productId": productId,
-                "status": status + 1
-            }));
+            res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.UPDATAE_STATUS_SUCCESS, { "updatedId": id, "status": status + 1 }));
 
             return;
         } catch (err) {
