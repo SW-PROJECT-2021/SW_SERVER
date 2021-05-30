@@ -116,4 +116,19 @@ module.exports = {
       throw err;
     }
   },
+  raise: async (id, orderStatus) => {
+    try {
+      const orders = await OrderHistory.update({
+        id,
+        orderStatus
+      }, {
+        where: {
+          id
+        }
+      });
+      return orders;
+    } catch (err) {
+      throw err;
+    }
+  },
 }

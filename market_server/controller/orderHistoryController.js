@@ -72,16 +72,13 @@ module.exports = {
   },
   raiseStatus: async (req, res) => {
     const {
-      orderHistoryId,
-      productId
+      id,
     } = req.body;
 
     await orderHistoryService.raise(
-      orderHistoryId,
-      productId,
+      id,
       res);
 
     return res;
   },
-
 }

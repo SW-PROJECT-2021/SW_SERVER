@@ -11,5 +11,7 @@ router.use('/basket', require('./basket'));
 router.use('/orderHistory', require('./orderHistory'));
 router.use('/dest', require('./destination'));
 router.use('/coupon', require('./coupon'));
+router.use('/review', require('./review'));
+
 
 module.exports = router;

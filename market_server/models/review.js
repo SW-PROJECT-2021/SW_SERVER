@@ -1,27 +1,31 @@
-// const { Product, User } = require('./index');
+const {
+  Product,
+  OrderHistory
+} = require('./index');
 
-// module.exports = (sequelize, DataTypes) => {
-// 	return sequelize.define('Review', {
-//     ProductId: {
-//       type: DataTypes.INTEGER,
-//       reference: {
-//         model: Product,
-//         key: 'id',
-//       }
-//     },
-//     OrderHistoryId: {
-//       type: DataTypes.INTEGER,
-//       reference: {
-//         model: OrderHistory,
-//         key: 'id',
-//       }
-//     },
-//     productCount: {
-//       type: DataTypes.INTEGER,
-//       allowNull: false,
-//     },
-//   }, {
-//     freezeTableName: true,
-//     timestamps: false,
-//   });
-// }
+module.exports = (sequelize, DataTypes) => {
+  return sequelize.define('Review', {
+    delivery: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0, // 0~2
+      allowNull: true,
+    },
+    recommand: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0, // 0~2
+      allowNull: true,
+    },
+    star: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1, // 1~5
+      allowNull: true,
+    },
+    detail: {
+      type: DataTypes.STRING(200), // 100자 제한
+      allowNull: true,
+    },
+  }, {
+    freezeTableName: true,
+    timestamps: true,
+  });
+}
