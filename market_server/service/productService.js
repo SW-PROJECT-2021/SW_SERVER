@@ -3,6 +3,9 @@ const responseMessage = require('../modules/responseMessage');
 const statusCode = require('../modules/statusCode');
 const productMethod = require('../method/productMethod');
 const categoryMethod = require('../method/categoryMethod');
+const reviewMethod = require('../method/reviewMethod');
+const review = require('../models/review');
+const userMethod = require('../method/userMethod');
 
 module.exports = {
   register: async (
@@ -67,6 +70,18 @@ module.exports = {
 
         return;
       }
+
+      const reivewByProduct = await reviewMethod.findAllByProductId(product.id);
+      const reviews = reivewByProduct.map(data => data.get({
+        plain: true
+      }));
+      for (let review of reviews) {
+        let userId = review.OrderHistory.UserId;
+        const user = await userMethod.findById(userId);
+        review.UserId = user.loginId;
+        delete review.OrderHistory;
+      }
+      product.reviews = reviews;
 
       res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.FIND_PRODUCT_BY_ID_SUCCESS, product));
 

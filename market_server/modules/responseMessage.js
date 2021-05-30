@@ -152,6 +152,13 @@ module.exports = {
   DELETE_DESTINATION_SUCCESS: "배송지 삭제 성공",
   DELETE_DESTINATION_SUCCESS: "배송지 삭제 성공",
 
+  /* 상품평 */
+  REGISTER_REVIEW_SUCCESS: "상품평 등록 성공",
+  REGISTER_REVIEW_FAIL: "상품평 등록 실패",
+  REIVEW_TOO_LONG: "후기 길이 초과",
+  GET_REVIEW_SUCCESS: "상품평 조회 성공",
+  GET_REVIEW_FAIL: "상품평 조회 실패",
+
   /* 카테고리 */
   NO_CATEGORY: "존재하지 않는 카테고리",
 
