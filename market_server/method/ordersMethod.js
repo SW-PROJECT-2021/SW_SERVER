@@ -14,18 +14,18 @@ module.exports = {
       throw err;
     }
   },
-  getOrder: async (OrderHistoryId, ProductId) => {
-    try {
-      const order = await Orders.findOne({
-        where: {
-          ProductId,
-          OrderHistoryId
-        },
-      });
+  // getOrder: async (OrderHistoryId, ProductId) => {
+  //   try {
+  //     const order = await Orders.findOne({
+  //       where: {
+  //         ProductId,
+  //         OrderHistoryId
+  //       },
+  //     });
 
-      return order;
-    } catch (err) {
-      throw err;
-    }
-  },
+  //     return order;
+  //   } catch (err) {
+  //     throw err;
+  //   }
+  // },
 }

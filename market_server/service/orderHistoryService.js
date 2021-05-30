@@ -31,8 +31,6 @@ module.exports = {
             }));
             for (element of processedOrder) {
                 for (let orders of element.Ordered) {
-                    const order = await ordersMethod.getOrder(element.id, orders.id);
-                    orders.orderStatus = order.status;
                     orders.count = orders.Orders.productCount;
                     delete orders.Orders;
                 }
@@ -57,8 +55,6 @@ module.exports = {
                 const user = await userMethod.findById(element.UserId);
                 element.UserId = user.loginId;
                 for (let orders of element.Ordered) {
-                    const order = await ordersMethod.getOrder(element.id, orders.id);
-                    orders.orderStatus = order.status;
                     orders.count = orders.Orders.productCount;
                     delete orders.Orders;
                 }
@@ -98,8 +94,6 @@ module.exports = {
             }));
             for (element of processedOrder) {
                 for (let orders of element.Ordered) {
-                    const order = await ordersMethod.getOrder(element.id, orders.id);
-                    orders.orderStatus = order.status;
                     orders.count = orders.Orders.productCount;
                     delete orders.Orders;
                 }
@@ -138,8 +132,6 @@ module.exports = {
                 const user = await userMethod.findById(element.UserId);
                 element.UserId = user.loginId;
                 for (let orders of element.Ordered) {
-                    const order = await ordersMethod.getOrder(element.id, orders.id);
-                    orders.orderStatus = order.status;
                     orders.count = orders.Orders.productCount;
                     delete orders.Orders;
                 }

@@ -23,11 +23,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    status: {
-      type: DataTypes.INTEGER,
-      defaultValue: 1,
-      allowNull: false,
-    },
   }, {
     freezeTableName: true,
     timestamps: false,
