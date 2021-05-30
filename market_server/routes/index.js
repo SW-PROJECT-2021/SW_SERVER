@@ -10,5 +10,6 @@ router.use('/banner', require('./banner'));
 router.use('/basket', require('./basket'));
 router.use('/orderHistory', require('./orderHistory'));
 router.use('/dest', require('./destination'));
+router.use('/coupon', require('./coupon'));
 
 module.exports = router;

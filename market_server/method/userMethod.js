@@ -60,4 +60,14 @@ module.exports = {
       throw err;
     }
   },
+  findAll: async () => {
+    try {
+      const users = await User.findAll({
+      });
+
+      return users;
+    } catch (err) {
+      throw err;
+    }
+  },
 }
