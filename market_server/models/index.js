@@ -5,9 +5,9 @@ const db = {};
 let sequelize;
 
 if (config.use_env_variable) {
- sequelize = new Sequelize(process.env[config.use_env_variable], config);
+    sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
- sequelize = new Sequelize(config.database, config.username, config.password, config);
+    sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
 db.sequelize = sequelize;
@@ -20,7 +20,10 @@ db.Destination = require('./destination')(sequelize, Sequelize);
 db.Banner = require('./banner')(sequelize, Sequelize);
 db.OrderHistory = require('./orderHistory')(sequelize, Sequelize);
 db.Orders = require('./orders')(sequelize, Sequelize);
+db.Coupon = require('./coupon')(sequelize, Sequelize);
+db.CurrentCoupon = require('./currentCoupon')(sequelize, Sequelize);
 db.Review = require('./review')(sequelize, Sequelize);
+
 
 // 1 : N 관계 Category : Product
 db.Category.hasMany(db.Product);
@@ -47,6 +50,11 @@ db.OrderHistory.belongsToMany(db.Product, { through: 'Orders', as: 'Ordered' });
 db.Product.belongsToMany(db.OrderHistory, { through: 'Orders', as: 'Orderer' }); // Product가 봤을때 OrderHistory는 Orderer!
 
 
+// M : N 관계 
+db.Coupon.belongsToMany(db.User, { through: 'CurrentCoupon', as: 'AvailableUser' }); // OrderHistory가 봤을때 Product는 Ordered!
+db.User.belongsToMany(db.Coupon, { through: 'CurrentCoupon', as: 'HaveCoupon' }); // Product가 봤을때 OrderHistory는 Orderer!
+
+
 // 1 : N 관계 OrderHistory : Review
 db.OrderHistory.hasMany(db.Review);
 db.Review.belongsTo(db.OrderHistory);
@@ -54,5 +62,6 @@ db.Review.belongsTo(db.OrderHistory);
 // 1 : N 관계 Product : Review
 db.Product.hasMany(db.Review);
 db.Review.belongsTo(db.Product);
+
 
 module.exports = db;

@@ -152,12 +152,30 @@ module.exports = {
   DELETE_DESTINATION_SUCCESS: "배송지 삭제 성공",
   DELETE_DESTINATION_SUCCESS: "배송지 삭제 성공",
 
+
+  /* 쿠폰 */
+  REGISTER_COUPON_SUCCESS: "쿠폰 등록 성공",
+  REGISTER_COUPON_FAIL: "쿠폰 등록 실패",
+  SO_BIG_DISCOUNT_RATE: "너무 큰 할인율",
+  ISSUE_COUPON_ALL_SUCCESS: "모두에게 쿠폰 발급 성공",
+  ISSUE_COUPON_ALL_FAIL: "모두에게 쿠폰 발급 실패",
+  ISSUE_COUPON_USER_SUCCESS: "유저에게 쿠폰 발급 성공",
+  ISSUE_COUPON_USER_FAIL: "유저에게 쿠폰 발급 실패",
+  ALREADY_COUPON: "이미 소지하고있는 쿠폰",
+  SEARCH_ALL_COUPON_BY_COUPON_SUCCESS: "쿠폰 소지 유저 조회 성공",
+  SEARCH_ALL_COUPON_BY_COUPON_FAIL: "쿠폰 소지 유저 조회 실패",
+  SEARCH_ALL_COUPON_BY_USER_SUCCESS: "유저가 소지한 쿠폰 조회 성공",
+  SEARCH_ALL_COUPON_BY_USER_FAIL: "유저가 소지한 쿠폰 조회 실패",
+  NO_EXIST_COUPON: "소지한 쿠폰 없음",
+  NO_EXIST_USER: "소지한 유저 없음",
+
   /* 상품평 */
   REGISTER_REVIEW_SUCCESS: "상품평 등록 성공",
   REGISTER_REVIEW_FAIL: "상품평 등록 실패",
   REIVEW_TOO_LONG: "후기 길이 초과",
   GET_REVIEW_SUCCESS: "상품평 조회 성공",
   GET_REVIEW_FAIL: "상품평 조회 실패",
+
 
   /* 카테고리 */
   NO_CATEGORY: "존재하지 않는 카테고리",
