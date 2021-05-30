@@ -23,32 +23,9 @@ module.exports = {
   //       },
   //     });
 
-<<<<<<< HEAD
   //     return order;
   //   } catch (err) {
   //     throw err;
   //   }
   // },
-=======
-      return order;
-    } catch (err) {
-      throw err;
-    }
-  },
-  raise: async (OrderHistoryId, ProductId, status) => {
-    try {
-      const orders = await Orders.update({
-        status
-      }, {
-        where: {
-          OrderHistoryId,
-          ProductId
-        }
-      });
-      return orders;
-    } catch (err) {
-      throw err;
-    }
-  },
->>>>>>> 9e911ba8c73ceb19d4047901315d59bc7dea7083
 }
