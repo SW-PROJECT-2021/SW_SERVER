@@ -179,9 +179,15 @@ module.exports = {
         discountCost,
         productList,
         res) => {
-        if (!orderDate || !orderDestination || !totalCost || !discountCost || productList.length == 0) {
+        if (!orderDate || !orderDestination || productList.length == 0) {
             console.log('필요값 누락');
             return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE));
+        }
+        if(!totalCost) {
+            totalCost = 0;
+        }
+        if(!discountCost) {
+            discountCost = 0;
         }
         try {
             transaction = await sequelize.transaction();
@@ -208,7 +214,7 @@ module.exports = {
                 await productMethod.sell(product.id, product.count - element.productCount, transaction);
             }
 
-            const orderHistoryObj = await orderHistoryMethod.register(userId, orderDate, orderDestination, totalCost, discountCost, orderDelivery, transaction);
+            const orderHistoryObj = await orderHistoryMethod.register(userId, orderDate, orderDestination, orderDelivery, totalCost, discountCost, transaction);
             for (element of productList) {
                 element.OrderHistoryId = orderHistoryObj.id;
                 console.log(element);
