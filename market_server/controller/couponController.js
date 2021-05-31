@@ -63,7 +63,7 @@ module.exports = {
         const UserId = passport.user.loginId;
         const {
             code,
-        } = req.body;
+        } = req.params;
 
         await couponService.isTrue(
             UserId,
