@@ -63,6 +63,19 @@ module.exports = {
             return;
         }
     },
+    getAll: async (
+        res) => {
+        try {
+            const coupons = await couponMethod.getAll();
+            res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.FIND_ALL_COUPON_SUCCESS, coupons));
+
+            return res;
+        } catch (err) {
+            console.error(err);
+            res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.FIND_ALL_COUPON_FAIL));
+            return;
+        }
+    },
     issueAll: async (
         couponId,
         res

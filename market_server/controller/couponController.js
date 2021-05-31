@@ -24,6 +24,13 @@ module.exports = {
 
         return res;
     },
+    getAllCoupon: async (req, res) => {
+        await couponService.getAll(
+            res
+        );
+
+        return res;
+    },
 
     issueAll: async (req, res) => {
         const {

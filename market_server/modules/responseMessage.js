@@ -158,6 +158,8 @@ module.exports = {
   REGISTER_COUPON_FAIL: "쿠폰 등록 실패",
   EXIST_COUPON: "이미 존재하는 쿠폰 코드",
   SO_BIG_DISCOUNT_RATE: "너무 큰 할인율",
+  FIND_ALL_COUPON_SUCCESS: "모든 쿠폰 조회 성공",
+  FIND_ALL_COUPON_FAIL: "모든 쿠폰 조회 성공",
   ISSUE_COUPON_ALL_SUCCESS: "모두에게 쿠폰 발급 성공",
   ISSUE_COUPON_ALL_FAIL: "모두에게 쿠폰 발급 실패",
   ISSUE_COUPON_USER_SUCCESS: "유저에게 쿠폰 발급 성공",
