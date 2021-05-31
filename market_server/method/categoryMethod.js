@@ -16,4 +16,17 @@ module.exports = {
       throw err;
     }
   },
+  findById: async (id) => {
+    try {
+      const categoryObj = await Category.findOne({
+        where: {
+          id
+        }
+      });
+
+      return categoryObj;
+    } catch (err) {
+      throw err;
+    }
+  },
 }

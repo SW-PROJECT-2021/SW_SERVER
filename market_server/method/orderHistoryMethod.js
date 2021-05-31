@@ -133,4 +133,13 @@ module.exports = {
       throw err;
     }
   },
+  getTotal: async () => {
+    try {
+      const orders = await OrderHistory.findAll();
+      
+      return orders;
+    } catch (err) {
+      throw err;
+    }
+  }
 }

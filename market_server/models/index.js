@@ -23,6 +23,7 @@ db.Orders = require('./orders')(sequelize, Sequelize);
 db.Coupon = require('./coupon')(sequelize, Sequelize);
 db.CurrentCoupon = require('./currentCoupon')(sequelize, Sequelize);
 db.Review = require('./review')(sequelize, Sequelize);
+db.Question = require('./question')(sequelize, Sequelize);
 
 
 // 1 : N 관계 Category : Product
@@ -63,5 +64,12 @@ db.Review.belongsTo(db.OrderHistory);
 db.Product.hasMany(db.Review);
 db.Review.belongsTo(db.Product);
 
+// 1 : N 관계 OrderHistory : Question
+db.OrderHistory.hasMany(db.Question);
+db.Question.belongsTo(db.OrderHistory);
+
+// 1 : N 관계 Product : Question
+db.Product.hasMany(db.Question);
+db.Question.belongsTo(db.Product);
 
 module.exports = db;
