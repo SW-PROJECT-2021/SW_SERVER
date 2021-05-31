@@ -28,6 +28,7 @@ module.exports = {
         basket.productName = product.name;
         basket.productPrice = product.price;
         basket.productImg = product.img1;
+        basket.productDelivery = product.delivery;
       }
       res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.GET_BASKET_SUCCESS, basketList));
 
