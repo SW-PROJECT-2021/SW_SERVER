@@ -58,6 +58,8 @@ module.exports = {
     const {
       orderDate,
       orderDestination,
+      totalCost,
+      discountCost,
       productList, // product의 id와 count를 가진 객체 배열
     } = req.body;
 
@@ -65,6 +67,8 @@ module.exports = {
       UserId,
       orderDate,
       orderDestination,
+      totalCost,
+      discountCost,
       productList,
       res);
 

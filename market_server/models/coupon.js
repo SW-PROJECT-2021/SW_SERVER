@@ -8,13 +8,25 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(30),
             allowNull: false,
         },
+        isAllCoupon: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+        },
         minimumPrice: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
+        discount: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        discountRate: {
+        categoryId: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
+        },
+        maximumDiscount: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
         },
     }, {
         freezeTableName: true,

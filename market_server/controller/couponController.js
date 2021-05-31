@@ -5,19 +5,33 @@ module.exports = {
         const {
             name,
             code,
+            isAll,
             minimumPrice,
-            discountRate,
+            discount,
+            categoryId,
+            maximumDiscount,
         } = req.body;
 
         await couponService.register(
             name,
             code,
+            isAll,
             minimumPrice,
-            discountRate,
+            discount,
+            categoryId,
+            maximumDiscount,
             res);
 
         return res;
     },
+    getAllCoupon: async (req, res) => {
+        await couponService.getAll(
+            res
+        );
+
+        return res;
+    },
+
     issueAll: async (req, res) => {
         const {
             couponId
@@ -40,6 +54,20 @@ module.exports = {
         await couponService.issueUser(
             couponId,
             userId,
+            res);
+
+        return res;
+    },
+    isTrueCoupon: async (req, res) => {
+        const passport = req.decoded;
+        const UserId = passport.user.loginId;
+        const {
+            code,
+        } = req.body;
+
+        await couponService.isTrue(
+            UserId,
+            code,
             res);
 
         return res;
