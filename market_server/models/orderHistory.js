@@ -20,10 +20,12 @@ module.exports = (sequelize, DataTypes) => { // 일정부분 수정
     },
     totalCost: {
       type: DataTypes.INTEGER,
+      defaultValue: 0,
       allowNull: true,
     },
     discountCost: {
       type: DataTypes.INTEGER,
+      defaultValue: 0,
       allowNull: true,
     },
   }, {

@@ -13,5 +13,6 @@ router.use('/dest', require('./destination'));
 router.use('/coupon', require('./coupon'));
 router.use('/review', require('./review'));
 router.use('/question', require('./question'));
+router.use('/sold', require('./sold'));
 
 module.exports = router;

@@ -193,6 +193,16 @@ module.exports = {
   GET_ORDER_QUESTION_FAIL: "주문내역 문의 조회 실패",
   TITLE_TOO_LONG: "문의 제목 길이 초과",
 
+  /* 판매 정보 */
+  GET_ALL_TOTAL_COST_SUCCESS: "모든 판매 누적 금액 조회 성공",
+  GET_ALL_TOTAL_COST_FAIL: "모든 판매 누적 금액 조회 실패",
+  GET_DATE_TOTAL_COST_SUCCESS: "날짜 필터링 판매 누적 금액 조회 성공",
+  GET_DATE_TOTAL_COST_FAIL: "날짜 필터링 판매 누적 금액 조회 실패",
+  GET_TOP_PRODUCTS_SUCCESS: "상위 상품 조회 성공",
+  GET_TOP_PRODUCTS_FAIL: "상위 상품 조회 실패",
+  GET_TOP_CATEGORY_SUCCESS: "상위 5개 카테고리 조회 성공",
+  GET_TOP_CATEGORY_FAIL: "상위 5개 카테고리 조회 실패",
+
   /* 카테고리 */
   NO_CATEGORY: "존재하지 않는 카테고리",
 
