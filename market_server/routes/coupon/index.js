@@ -11,4 +11,5 @@ router.get('/all', auth.checkSession, couponController.getAllCoupon);
 router.get('/isAvailable/:code', auth.checkSession, couponController.isTrueCoupon);
 router.get('/search/user', auth.checkSession, couponController.searchAvailableUser);
 router.get('/search/coupon', auth.checkSession, couponController.searchAvailableCoupon);
+router.delete('/delete/:id', auth.checkSession, auth.checkAdmin, couponController.deleteCoupon);
 module.exports = router;

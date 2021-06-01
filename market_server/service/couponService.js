@@ -2,9 +2,10 @@ const util = require('../modules/util');
 const responseMessage = require('../modules/responseMessage');
 const statusCode = require('../modules/statusCode');
 const couponMethod = require('../method/couponMethod');
-const CurrentCouponMethod = require('../method/currentCoupon');
+const CurrentCouponMethod = require('../method/currentCouponMethod');
 const userMethod = require('../method/userMethod');
 const { Coupon } = require('../models');
+const currentCouponMethod = require('../method/currentCouponMethod');
 
 
 module.exports = {
@@ -255,5 +256,27 @@ module.exports = {
             return;
         }
     },
+    deleteCoupon: async (
+        couponId,
+        res
+    ) => {
+        if (!couponId) {
+            console.log('필요값 누락');
 
+            res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE));
+            return;
+        }
+        try {
+            await couponMethod.delete(couponId);
+            await currentCouponMethod.delete(couponId);
+            res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.FIND_ALL_COUPON_SUCCESS,
+                { "deletedId": couponId }));
+
+            return res;
+        } catch (err) {
+            console.error(err);
+            res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.FIND_ALL_COUPON_FAIL));
+            return;
+        }
+    },
 }

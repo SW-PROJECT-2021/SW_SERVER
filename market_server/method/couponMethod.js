@@ -83,4 +83,16 @@ module.exports = {
             throw err;
         }
     },
+    delete: async (
+        id) => {
+        try {
+            await Coupon.destroy({
+                where: {
+                    id
+                }
+            });
+        } catch (err) {
+            throw err;
+        }
+    },
 }
