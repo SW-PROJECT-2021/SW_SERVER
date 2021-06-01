@@ -269,13 +269,13 @@ module.exports = {
         try {
             await couponMethod.delete(couponId);
             await currentCouponMethod.delete(couponId);
-            res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.FIND_ALL_COUPON_SUCCESS,
+            res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.DELETED_COUPON_SUCCESS,
                 { "deletedId": couponId }));
 
             return res;
         } catch (err) {
             console.error(err);
-            res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.FIND_ALL_COUPON_FAIL));
+            res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.DELETED_COUPON_FAIL));
             return;
         }
     },
