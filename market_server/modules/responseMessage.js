@@ -174,6 +174,8 @@ module.exports = {
   AVAILABLE_COUPON: "사용 가능한 쿠폰 코드",
   NO_EXIST_COUPON: "소지한 쿠폰 없음",
   NO_EXIST_USER: "소지한 유저 없음",
+  DELETED_COUPON_SUCCESS: "쿠폰 삭제 성공",
+  DELETED_COUPON_FAIL: "쿠폰 삭제 성공",
 
   /* 상품평 */
   REGISTER_REVIEW_SUCCESS: "상품평 등록 성공",
