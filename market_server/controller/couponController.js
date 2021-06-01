@@ -94,5 +94,27 @@ module.exports = {
 
         return res;
     },
+    isTrueCoupon: async (req, res) => {
+        const {
+            code,
+        } = req.params;
+
+        await couponService.isTrue(
+            code,
+            res);
+
+        return res;
+    },
+    deleteCoupon: async (req, res) => {
+        const {
+            id,
+        } = req.params;
+
+        await couponService.deleteCoupon(
+            id,
+            res);
+
+        return res;
+    },
 
 }

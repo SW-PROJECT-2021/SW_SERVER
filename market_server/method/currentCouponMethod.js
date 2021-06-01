@@ -57,4 +57,16 @@ module.exports = {
             throw err;
         }
     },
+    delete: async (
+        CouponId) => {
+        try {
+            await CurrentCoupon.destroy({
+                where: {
+                    CouponId
+                }
+            });
+        } catch (err) {
+            throw err;
+        }
+    },
 }
