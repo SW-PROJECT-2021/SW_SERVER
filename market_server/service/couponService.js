@@ -161,6 +161,7 @@ module.exports = {
             return;
         }
         try {
+            console.log("userId", UserId, "code", code);
             const user = await userMethod.readOneLoginId(UserId);
             const userId = user.id;
 
