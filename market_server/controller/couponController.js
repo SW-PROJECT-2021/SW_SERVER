@@ -65,6 +65,7 @@ module.exports = {
             code,
         } = req.params;
 
+        console.log(UserId);
         await couponService.isTrue(
             UserId,
             code,
@@ -90,17 +91,6 @@ module.exports = {
 
         await couponService.searchCoupon(
             userId,
-            res);
-
-        return res;
-    },
-    isTrueCoupon: async (req, res) => {
-        const {
-            code,
-        } = req.params;
-
-        await couponService.isTrue(
-            code,
             res);
 
         return res;
