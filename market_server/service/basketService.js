@@ -25,6 +25,7 @@ module.exports = {
           basket.soldOut = false;
           basket.productCnt = product.count;
         }
+        basket.CategoryId = product.CategoryId;
         basket.productName = product.name;
         basket.productPrice = product.price;
         basket.productImg = product.img1;
