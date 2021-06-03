@@ -18,6 +18,16 @@ module.exports = (sequelize, DataTypes) => { // 일정부분 수정
       defaultValue: 1,
       allowNull: true,
     },
+    totalCost: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: true,
+    },
+    discountCost: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: true,
+    },
   }, {
     freezeTableName: true,
     timestamps: true,

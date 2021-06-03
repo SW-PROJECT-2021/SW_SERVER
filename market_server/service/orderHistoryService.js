@@ -175,11 +175,19 @@ module.exports = {
         UserId,
         orderDate,
         orderDestination,
+        totalCost,
+        discountCost,
         productList,
         res) => {
         if (!orderDate || !orderDestination || productList.length == 0) {
             console.log('필요값 누락');
             return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE));
+        }
+        if(!totalCost) {
+            totalCost = 0;
+        }
+        if(!discountCost) {
+            discountCost = 0;
         }
         try {
             transaction = await sequelize.transaction();
@@ -191,7 +199,7 @@ module.exports = {
                 if (product.delivery > orderDelivery) {
                     orderDelivery = product.delivery;
                 }
-                if (!product || product.isDeleted) {
+                if (!product || product.count == 0) {
                     console.log("해당 상품이 존재하지 않습니다.")
                     res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NO_EXIST_PRODUCT));
 
@@ -206,7 +214,7 @@ module.exports = {
                 await productMethod.sell(product.id, product.count - element.productCount, transaction);
             }
 
-            const orderHistoryObj = await orderHistoryMethod.register(userId, orderDate, orderDestination, orderDelivery, transaction);
+            const orderHistoryObj = await orderHistoryMethod.register(userId, orderDate, orderDestination, orderDelivery, totalCost, discountCost, transaction);
             for (element of productList) {
                 element.OrderHistoryId = orderHistoryObj.id;
                 console.log(element);

@@ -102,12 +102,14 @@ module.exports = {
       throw err;
     }
   },
-  register: async (UserId, orderDate, orderDestination, orderDelivery, transaction) => {
+  register: async (UserId, orderDate, orderDestination, orderDelivery, totalCost, discountCost, transaction) => {
     try {
       const orders = await OrderHistory.create({
         UserId,
         orderDate,
         orderDestination,
+        totalCost,
+        discountCost,
         orderDelivery,
       }, transaction);
 
@@ -131,4 +133,13 @@ module.exports = {
       throw err;
     }
   },
+  getTotal: async () => {
+    try {
+      const orders = await OrderHistory.findAll();
+      
+      return orders;
+    } catch (err) {
+      throw err;
+    }
+  }
 }

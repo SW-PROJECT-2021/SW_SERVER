@@ -152,6 +152,57 @@ module.exports = {
   DELETE_DESTINATION_SUCCESS: "배송지 삭제 성공",
   DELETE_DESTINATION_SUCCESS: "배송지 삭제 성공",
 
+
+  /* 쿠폰 */
+  REGISTER_COUPON_SUCCESS: "쿠폰 등록 성공",
+  REGISTER_COUPON_FAIL: "쿠폰 등록 실패",
+  EXIST_COUPON: "이미 존재하는 쿠폰 코드",
+  SO_BIG_DISCOUNT_RATE: "너무 큰 할인율",
+  ISSUE_COUPON_ALL_SUCCESS: "모두에게 쿠폰 발급 성공",
+  ISSUE_COUPON_ALL_FAIL: "모두에게 쿠폰 발급 실패",
+  ISSUE_COUPON_USER_SUCCESS: "유저에게 쿠폰 발급 성공",
+  ISSUE_COUPON_USER_FAIL: "유저에게 쿠폰 발급 실패",
+  ALREADY_COUPON: "이미 소지하고있는 쿠폰",
+  SEARCH_ALL_COUPON_BY_COUPON_SUCCESS: "쿠폰 소지 유저 조회 성공",
+  SEARCH_ALL_COUPON_BY_COUPON_FAIL: "쿠폰 소지 유저 조회 실패",
+  SEARCH_ALL_COUPON_BY_USER_SUCCESS: "유저가 소지한 쿠폰 조회 성공",
+  SEARCH_ALL_COUPON_BY_USER_FAIL: "유저가 소지한 쿠폰 조회 실패",
+  NO_AVAILABLE_USER_COUPON: "해당 쿠폰 소지하지 않음",
+  NO_AVAILABLE_COUPON: "사용 불가능한 쿠폰 코드",
+  AVAILABLE_COUPON: "사용 가능한 쿠폰 코드",
+  NO_EXIST_COUPON: "소지한 쿠폰 없음",
+  NO_EXIST_USER: "소지한 유저 없음",
+
+  /* 상품평 */
+  REGISTER_REVIEW_SUCCESS: "상품평 등록 성공",
+  REGISTER_REVIEW_FAIL: "상품평 등록 실패",
+  REIVEW_TOO_LONG: "후기 길이 초과",
+  GET_REVIEW_SUCCESS: "상품평 조회 성공",
+  GET_REVIEW_FAIL: "상품평 조회 실패",
+
+  /* 문의 */
+  REGISTER_QUESTION_SUCCESS: "문의 등록 성공",
+  REGISTER_QUESTION_FAIL: "문의 등록 실패",
+  REGISTER_ANSWER_SUCCESS: "답변 등록 성공",
+  REGISTER_ANSWER_FAIL: "답변 등록 실패",
+  GET_QUESTION_DETAIL_SUCCESS: "문의 상세조회 성공",
+  GET_QUESTION_DETAIL_FAIL: "문의 상세조회 실패",
+  GET_ALL_QUESTION_SUCCESS: "전체 문의 조회 성공",
+  GET_ALL_QUESTION_FAIL: "전체 문의 조회 실패",
+  GET_ORDER_QUESTION_SUCCESS: "주문내역 문의 조회 성공",
+  GET_ORDER_QUESTION_FAIL: "주문내역 문의 조회 실패",
+  TITLE_TOO_LONG: "문의 제목 길이 초과",
+
+  /* 판매 정보 */
+  GET_ALL_TOTAL_COST_SUCCESS: "모든 판매 누적 금액 조회 성공",
+  GET_ALL_TOTAL_COST_FAIL: "모든 판매 누적 금액 조회 실패",
+  GET_DATE_TOTAL_COST_SUCCESS: "날짜 필터링 판매 누적 금액 조회 성공",
+  GET_DATE_TOTAL_COST_FAIL: "날짜 필터링 판매 누적 금액 조회 실패",
+  GET_TOP_PRODUCTS_SUCCESS: "상위 상품 조회 성공",
+  GET_TOP_PRODUCTS_FAIL: "상위 상품 조회 실패",
+  GET_TOP_CATEGORY_SUCCESS: "상위 5개 카테고리 조회 성공",
+  GET_TOP_CATEGORY_FAIL: "상위 5개 카테고리 조회 실패",
+
   /* 카테고리 */
   NO_CATEGORY: "존재하지 않는 카테고리",
 
