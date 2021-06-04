@@ -128,7 +128,6 @@ module.exports = {
             return;
         }
         try {
-            console.log(userLoginId, "#######################################");
             const user = await userMethod.readOneLoginId(userLoginId);
             const userId = user.id;
             const alreadyCoupons = await CurrentCouponMethod.searchCoupon(userId);
