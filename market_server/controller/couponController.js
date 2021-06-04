@@ -47,13 +47,13 @@ module.exports = {
     isesueUser: async (req, res) => {
         const {
             couponId,
-            userId,
+            userLoginId,
         } = req.body;
 
 
         await couponService.issueUser(
             couponId,
-            userId,
+            userLoginId,
             res);
 
         return res;

@@ -118,17 +118,19 @@ module.exports = {
     },
     issueUser: async (
         couponId,
-        userId,
+        userLoginId,
         res
     ) => {
-        if (!couponId || !userId) {
+        if (!couponId || !userLoginId) {
             console.log('필요값 누락');
 
             res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE));
             return;
         }
         try {
-
+            console.log(userLoginId, "#######################################");
+            const user = await userMethod.readOneLoginId(userLoginId);
+            const userId = user.id;
             const alreadyCoupons = await CurrentCouponMethod.searchCoupon(userId);
             let alreadyCouponList = alreadyCoupons.map(alreadyCoupon => alreadyCoupon.CouponId);
 
