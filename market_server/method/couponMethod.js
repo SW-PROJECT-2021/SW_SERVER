@@ -23,6 +23,16 @@ module.exports = {
             throw err;
         }
     },
+    getAll: async () => {
+        try {
+            const coupon = await Coupon.findAll({
+            });
+
+            return coupon;
+        } catch (err) {
+            throw err;
+        }
+    },
     register: async (
         couponName,
         couponCode,
@@ -69,6 +79,18 @@ module.exports = {
             });
 
             return coupon;
+        } catch (err) {
+            throw err;
+        }
+    },
+    delete: async (
+        id) => {
+        try {
+            await Coupon.destroy({
+                where: {
+                    id
+                }
+            });
         } catch (err) {
             throw err;
         }

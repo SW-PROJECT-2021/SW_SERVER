@@ -2,9 +2,10 @@ const util = require('../modules/util');
 const responseMessage = require('../modules/responseMessage');
 const statusCode = require('../modules/statusCode');
 const couponMethod = require('../method/couponMethod');
-const CurrentCouponMethod = require('../method/currentCoupon');
+const CurrentCouponMethod = require('../method/currentCouponMethod');
 const userMethod = require('../method/userMethod');
 const { Coupon } = require('../models');
+const currentCouponMethod = require('../method/currentCouponMethod');
 
 
 module.exports = {
@@ -63,6 +64,19 @@ module.exports = {
             return;
         }
     },
+    getAll: async (
+        res) => {
+        try {
+            const coupons = await couponMethod.getAll();
+            res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.FIND_ALL_COUPON_SUCCESS, coupons));
+
+            return res;
+        } catch (err) {
+            console.error(err);
+            res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.FIND_ALL_COUPON_FAIL));
+            return;
+        }
+    },
     issueAll: async (
         couponId,
         res
@@ -104,17 +118,18 @@ module.exports = {
     },
     issueUser: async (
         couponId,
-        userId,
+        userLoginId,
         res
     ) => {
-        if (!couponId || !userId) {
+        if (!couponId || !userLoginId) {
             console.log('필요값 누락');
 
             res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE));
             return;
         }
         try {
-
+            const user = await userMethod.readOneLoginId(userLoginId);
+            const userId = user.id;
             const alreadyCoupons = await CurrentCouponMethod.searchCoupon(userId);
             let alreadyCouponList = alreadyCoupons.map(alreadyCoupon => alreadyCoupon.CouponId);
 
@@ -147,6 +162,7 @@ module.exports = {
             return;
         }
         try {
+            console.log("userId", UserId, "code", code);
             const user = await userMethod.readOneLoginId(UserId);
             const userId = user.id;
 
@@ -156,11 +172,9 @@ module.exports = {
                 res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NO_AVAILABLE_COUPON))
                 return;
             }
-
             const isAvailable = await CurrentCouponMethod.available(coupon.id, userId);
-            console.log(isAvailable);
 
-            if (!isAvailable) {
+            if (isAvailable != null) {
                 res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.AVAILABLE_COUPON, coupon));
             }
             else {
@@ -244,5 +258,27 @@ module.exports = {
             return;
         }
     },
+    deleteCoupon: async (
+        couponId,
+        res
+    ) => {
+        if (!couponId) {
+            console.log('필요값 누락');
 
+            res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE));
+            return;
+        }
+        try {
+            await couponMethod.delete(couponId);
+            await currentCouponMethod.delete(couponId);
+            res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.DELETED_COUPON_SUCCESS,
+                { "deletedId": couponId }));
+
+            return res;
+        } catch (err) {
+            console.error(err);
+            res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.DELETED_COUPON_FAIL));
+            return;
+        }
+    },
 }

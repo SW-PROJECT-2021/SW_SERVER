@@ -158,6 +158,8 @@ module.exports = {
   REGISTER_COUPON_FAIL: "쿠폰 등록 실패",
   EXIST_COUPON: "이미 존재하는 쿠폰 코드",
   SO_BIG_DISCOUNT_RATE: "너무 큰 할인율",
+  FIND_ALL_COUPON_SUCCESS: "모든 쿠폰 조회 성공",
+  FIND_ALL_COUPON_FAIL: "모든 쿠폰 조회 성공",
   ISSUE_COUPON_ALL_SUCCESS: "모두에게 쿠폰 발급 성공",
   ISSUE_COUPON_ALL_FAIL: "모두에게 쿠폰 발급 실패",
   ISSUE_COUPON_USER_SUCCESS: "유저에게 쿠폰 발급 성공",
@@ -172,6 +174,8 @@ module.exports = {
   AVAILABLE_COUPON: "사용 가능한 쿠폰 코드",
   NO_EXIST_COUPON: "소지한 쿠폰 없음",
   NO_EXIST_USER: "소지한 유저 없음",
+  DELETED_COUPON_SUCCESS: "쿠폰 삭제 성공",
+  DELETED_COUPON_FAIL: "쿠폰 삭제 성공",
 
   /* 상품평 */
   REGISTER_REVIEW_SUCCESS: "상품평 등록 성공",

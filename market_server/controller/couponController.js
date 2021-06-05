@@ -24,6 +24,13 @@ module.exports = {
 
         return res;
     },
+    getAllCoupon: async (req, res) => {
+        await couponService.getAll(
+            res
+        );
+
+        return res;
+    },
 
     issueAll: async (req, res) => {
         const {
@@ -40,13 +47,13 @@ module.exports = {
     isesueUser: async (req, res) => {
         const {
             couponId,
-            userId,
+            userLoginId,
         } = req.body;
 
 
         await couponService.issueUser(
             couponId,
-            userId,
+            userLoginId,
             res);
 
         return res;
@@ -56,8 +63,9 @@ module.exports = {
         const UserId = passport.user.loginId;
         const {
             code,
-        } = req.body;
+        } = req.params;
 
+        console.log(UserId);
         await couponService.isTrue(
             UserId,
             code,
@@ -83,6 +91,17 @@ module.exports = {
 
         await couponService.searchCoupon(
             userId,
+            res);
+
+        return res;
+    },
+    deleteCoupon: async (req, res) => {
+        const {
+            id,
+        } = req.params;
+
+        await couponService.deleteCoupon(
+            id,
             res);
 
         return res;
